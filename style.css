@@ -434,7 +434,7 @@ h1 {
   border: 2px solid var(--accent-dim);
 }
 .about-bio {
-  color: var(--muted);
+  color: var(--text);
   font-size: 0.97rem;
   line-height: 1.75;
   margin-bottom: 1rem;
