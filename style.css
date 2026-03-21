@@ -423,12 +423,29 @@ h1 {
   align-items: start;
 }
 
+.about-headshot-wrap {
+  margin-bottom: 1.75rem;
+}
+.about-headshot {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent-dim);
+}
+.about-bio {
+  color: var(--muted);
+  font-size: 0.97rem;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
 .about-left h2 {
   font-size: clamp(1.6rem, 3vw, 2.25rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.2;
   margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .about-right {
