@@ -1,321 +1,1030 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casey McDougal — Web Design & AI Integration</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="description" content="Casey McDougal — Web designer and AI integration specialist for local businesses. Fast, clean websites and smart automations that save time." />
-  <meta name="author" content="Casey McDougal" />
-  <meta property="og:title" content="Casey McDougal — Web Design & AI Integration" />
-  <meta property="og:description" content="Fast, modern websites and AI tools for local businesses that want to grow." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://caseymcdougal.com" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Casey McDougal — Web Design & AI Integration" />
-  <meta name="twitter:description" content="Fast, modern websites and AI tools for local businesses that want to grow." />
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400,300&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Website Demo for Tennessee Contractors | Casey McDougal</title>
+  <meta name="description" content="I build free demo websites for contractors in Middle Tennessee. See your site before you pay a dime. Flat $200 to go live. No monthly fees.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0b;
+      --bg-elevated: #141416;
+      --bg-card: #1a1a1c;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent: #22c55e;
+      --accent-dim: #16a34a;
+      --border: #27272a;
+      --border-subtle: #1f1f23;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --max-width: 1100px;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 10, 11, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    
+    nav .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--text);
+    }
+    
+    .nav-cta {
+      background: var(--accent);
+      color: var(--bg) !important;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+    }
+    
+    .nav-cta:hover {
+      background: var(--accent-dim);
+    }
+    
+    /* Hero */
+    .hero {
+      padding: 140px 1.5rem 80px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+    
+    .hero h1 span {
+      color: var(--accent);
+    }
+    
+    .hero-sub {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-dim);
+      transform: translateY(-1px);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bg-elevated);
+      border-color: var(--text-dim);
+    }
+    
+    /* Demo Preview */
+    .demo-preview {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    
+    .demo-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .demo-dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+    
+    .demo-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    
+    .demo-dots span:nth-child(1) { background: #ef4444; }
+    .demo-dots span:nth-child(2) { background: #f59e0b; }
+    .demo-dots span:nth-child(3) { background: #22c55e; }
+    
+    .demo-url {
+      flex: 1;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-family: monospace;
+    }
+    
+    .demo-frame {
+      position: relative;
+      aspect-ratio: 16/10;
+      background: var(--bg);
+    }
+    
+    .demo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .demo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,11,0.9) 0%, transparent 50%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+    
+    .demo-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .demo-info p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    
+    /* Sections */
+    section {
+      padding: 80px 1.5rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      margin-bottom: 3rem;
+    }
+    
+    .section-header h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+    }
+    
+    /* How It Works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.9rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    
+    .step h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .step p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    
+    .step .guarantee {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+    
+    /* Work */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .work-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+    }
+    
+    .work-card:hover {
+      border-color: var(--text-dim);
+      transform: translateY(-2px);
+    }
+    
+    .work-image {
+      aspect-ratio: 16/10;
+      background: var(--bg-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .work-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    
+    .work-card:hover .work-image img {
+      transform: scale(1.02);
+    }
+    
+    .work-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(10,10,11,0.9);
+      padding: 0.4rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .work-content {
+      padding: 1.25rem;
+    }
+    
+    .work-content h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+    }
+    
+    .work-content p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .work-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .work-meta span {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      background: var(--bg-elevated);
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+    }
+    
+    /* Trust */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .trust-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    
+    .trust-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .trust-icon svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+    }
+    
+    .trust-text h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .trust-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    /* Pricing */
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .pricing-card .price {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    
+    .pricing-card .price-note {
+      color: var(--text-muted);
+      margin: 0.5rem 0 1.5rem;
+    }
+    
+    .pricing-features {
+      text-align: left;
+      max-width: 280px;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    
+    .pricing-features li svg {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    
+    /* FAQ */
+    .faq-list {
+      max-width: 700px;
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+    
+    .faq-item h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .faq-item p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding-right: 2rem;
+    }
+    
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    
+    .contact-info h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+    
+    .contact-info p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    
+    .contact-method svg {
+      color: var(--accent);
+    }
+    
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .form-success {
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      margin-top: 1rem;
+    }
+    
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+    }
+    
+    footer .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    footer p {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      color: var(--text);
+    }
+    
+    /* Mobile */
+    @media (max-width: 640px) {
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+      
+      .hero {
+        padding-top: 100px;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <!-- NAV -->
   <nav>
-    <span class="logo">Casey McDougal</span>
-    <div class="nav-right">
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact" class="nav-cta">Get a Free Demo</a>
+    <div class="container">
+      <a href="#" class="logo">Casey McDougal</a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#how">How It Works</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="nav-cta">Get Free Demo</a>
+      </div>
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
-    <div class="hero-left">
-      <p class="eyebrow animate delay-1">Web Design &amp; AI Integration</p>
-      <h1 class="animate delay-2">Websites that<br>work hard.<br><span class="accent-text">Tools that save time.</span></h1>
-      <p class="hero-sub animate delay-3">
-        I build websites for Middle Tennessee contractors and tradespeople. Flat fee, no monthly bills, no surprises.
-      </p>
-      <div class="hero-actions animate delay-4">
-        <a href="#contact" class="btn">Start a project</a>
-        <a href="#services" class="btn-ghost">See what I do</a>
-      </div>
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Available for projects in Middle Tennessee
     </div>
-    <div class="hero-right animate delay-3" aria-hidden="true">
-      <div class="hero-visual">
-        <div class="v-ring v-ring-1"></div>
-        <div class="v-ring v-ring-2"></div>
-        <div class="v-ring v-ring-3"></div>
-        <div class="v-dot-grid"></div>
-        <div class="v-orb"></div>
-        <div class="v-pill">
-          <span class="v-dot-live"></span>
-          Available for projects
-        </div>
-      </div>
+    <h1>I'll build you a <span>free demo website</span> before you spend a dime.</h1>
+    <p class="hero-sub">No calls, no pressure, no upfront cost. I build custom demo sites for contractors and tradespeople in Tennessee. If you like it, pay $200 to make it yours. If not, no hard feelings.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">
+        Get Your Free Demo
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#work" class="btn btn-secondary">See Recent Work</a>
     </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section class="services" id="services">
-    <div class="container">
-      <p class="section-label animate-scroll">What I do</p>
-
-      <div class="service-list">
-
-        <div class="service-row animate-scroll">
-          <div class="service-num">01</div>
-          <div class="service-body">
-            <h3>Web Design</h3>
-            <p>Clean, fast sites that look like they cost 10x more. Built from scratch — no bloated builders, no locked-in templates. Yours to own.</p>
-          </div>
-          <div class="service-arrow">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-
-        <div class="service-row animate-scroll">
-          <div class="service-num">02</div>
-          <div class="service-body">
-            <h3>AI Integration</h3>
-            <p>Chat tools, booking automations, and smart workflows that cut the busywork. Built to fit how your business already runs.</p>
-          </div>
-          <div class="service-arrow">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-
-        <div class="service-row animate-scroll">
-          <div class="service-num">03</div>
-          <div class="service-body">
-            <h3>Ongoing Support</h3>
-            <p>Updates, edits, and improvements without the agency price tag. I'm reachable and I move fast.</p>
-          </div>
-          <div class="service-arrow">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-
+    
+    <div class="demo-preview">
+      <div class="demo-header">
+        <div class="demo-dots"><span></span><span></span><span></span></div>
+        <span class="demo-url">tristar-property-services.surge.sh</span>
       </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="container about-grid">
-      <div class="about-left">
-        <p class="section-label">About</p>
-        <div class="about-headshot-wrap">
-          <img src="headshot.jpg" alt="Casey McDougal" class="about-headshot" onerror="this.style.display='none'" />
-        </div>
-        <h2>Hey, I'm Casey.</h2>
-        <p class="about-bio">I'm a web designer based in Middle Tennessee. I build websites for local service businesses — contractors, tradespeople, and small shop owners who are great at their work but don't have time to deal with the technical side of getting found online.</p>
-        <p class="about-bio">My approach is simple: I build you a demo first so you can see exactly what you're getting before spending a dime. No retainers, no monthly fees, no surprises.</p>
-        <p class="about-bio">If you got an email from me with a free demo, that's the idea — I'd rather show you than pitch you.</p>
-      </div>
-      <div class="about-right">
-        <div class="about-item">
-          <span class="about-tag">Fast</span>
-          <p>Projects don't drag on here. You get something real on a timeline that makes sense for your business.</p>
-        </div>
-        <div class="about-item">
-          <span class="about-tag">Honest</span>
-          <p>I'll tell you what you actually need — not upsell you on services that pad my invoice.</p>
-        </div>
-        <div class="about-item">
-          <span class="about-tag">Technical</span>
-          <p>Real code, not drag-and-drop. That means your site stays fast, stays yours, and doesn't break the moment you need something custom.</p>
-        </div>
-        <div class="about-item">
-          <span class="about-tag">Local</span>
-          <p>Middle Tennessee is home. I care about the businesses here — that's why I build the demo before asking for anything.</p>
+      <div class="demo-frame">
+        <img src="glory-hvac-preview.png" alt="Demo website for TriStar Property Services">
+        <div class="demo-overlay">
+          <div class="demo-info">
+            <h3>TriStar Property Services</h3>
+            <p>Recent demo for a Knoxville contractor — built in 24 hours</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WORK -->
-  <section class="work" id="work">
-    <div class="container">
-      <p class="section-label animate-scroll">Work</p>
-      <a href="https://ironwood-barber.pages.dev/" target="_blank" rel="noopener" class="project-card animate-scroll">
-        <div class="project-preview">
-          <img src="ironwood-preview.png" alt="Ironwood Barber Co." />
-          <span class="project-tag">Web Design</span>
+  <section id="how">
+    <div class="section-header">
+      <h2>How the free demo works</h2>
+      <p>Three steps. Zero risk. You see exactly what you're getting before making any decision.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <h3>You tell me about your business</h3>
+        <p>Fill out a short form with your business name, services, and location. Takes 2 minutes. No phone call required.</p>
+        <div class="guarantee">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0-4a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Zero commitment. Zero pressure.
         </div>
-        <div class="project-info">
-          <div class="project-meta">
-            <h3>Ironwood Barber Co.</h3>
-            <svg class="project-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p>Full site for a Nashville barbershop — services, booking form, and gallery. Built from scratch, no templates.</p>
-          <div class="project-chips">
-            <span>HTML / CSS</span>
-            <span>Responsive</span>
-            <span>Nashville</span>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <h3>I build your demo in 24-48 hours</h3>
+        <p>I research your business, write the copy, and build a complete demo site with your branding. You get a live link to review.</p>
+        <div class="guarantee">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0-4a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Free. No credit card required.
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <h3>You decide if you want it</h3>
+        <p>Like it? Pay $200 and I'll put it on your domain. Don't like it? Keep the link as a reference, no hard feelings.</p>
+        <div class="guarantee">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0-4a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Flat $200. No monthly fees. Ever.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-header">
+      <h2>Recent demos & live sites</h2>
+      <p>Every site built from scratch for real businesses in Tennessee.</p>
+    </div>
+    <div class="work-grid">
+      <a href="https://tristar-property-services.surge.sh" target="_blank" class="work-card">
+        <div class="work-image">
+          <img src="glory-hvac-preview.png" alt="TriStar Property Services">
+          <span class="work-tag">Demo → Live</span>
+        </div>
+        <div class="work-content">
+          <h3>TriStar Property Services</h3>
+          <p>Painting, pressure washing, and junk removal in Knoxville. Demo built in 24 hours, now live on their domain.</p>
+          <div class="work-meta">
+            <span>Knoxville, TN</span>
+            <span>Contractor</span>
           </div>
         </div>
       </a>
-      <a href="https://kettleblack-coffee.pages.dev/" target="_blank" rel="noopener" class="project-card animate-scroll">
-        <div class="project-preview">
-          <img src="kettleblack-preview.png" alt="Kettle Black Coffee" />
-          <span class="project-tag">Web Design</span>
+      <a href="https://ironwood-barber.pages.dev/" target="_blank" class="work-card">
+        <div class="work-image">
+          <img src="ironwood-preview.png" alt="Ironwood Barber Co.">
+          <span class="work-tag">Live Site</span>
         </div>
-        <div class="project-info">
-          <div class="project-meta">
-            <h3>Kettle Black Coffee</h3>
-            <svg class="project-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p>Site for an East Nashville coffee shop — roast shop, full menu, and location info. Built from scratch, no templates.</p>
-          <div class="project-chips">
-            <span>HTML / CSS</span>
-            <span>Responsive</span>
-            <span>Nashville</span>
+        <div class="work-content">
+          <h3>Ironwood Barber Co.</h3>
+          <p>Full site for a Nashville barbershop with online booking, services, and gallery.</p>
+          <div class="work-meta">
+            <span>Nashville, TN</span>
+            <span>Barbershop</span>
           </div>
         </div>
       </a>
-            <a href="https://linden-rye.pages.dev/" target="_blank" rel="noopener" class="project-card animate-scroll">
-        <div class="project-preview">
-          <img src="lindenrye-preview.png" alt="Linden and Rye" />
-          <span class="project-tag">Web Design</span>
+      <a href="https://kettleblack-coffee.pages.dev/" target="_blank" class="work-card">
+        <div class="work-image">
+          <img src="kettleblack-preview.png" alt="Kettle Black Coffee">
+          <span class="work-tag">Live Site</span>
         </div>
-        <div class="project-info">
-          <div class="project-meta">
-            <h3>Linden &amp; Rye</h3>
-            <svg class="project-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p>Site for a 12 South Nashville bistro — seasonal menu, reservation form, and photo gallery. Built from scratch, no templates.</p>
-          <div class="project-chips">
-            <span>HTML / CSS</span>
-            <span>Responsive</span>
-            <span>Nashville</span>
+        <div class="work-content">
+          <h3>Kettle Black Coffee</h3>
+          <p>Site for an East Nashville coffee shop with menu, location, and roast information.</p>
+          <div class="work-meta">
+            <span>Nashville, TN</span>
+            <span>Coffee Shop</span>
           </div>
         </div>
       </a>
-      <a href="https://glory-hvac-service-llc.surge.sh" target="_blank" rel="noopener" class="project-card animate-scroll">
-        <div class="project-preview">
-          <img src="glory-hvac-preview.png" alt="Glory HVAC Service Demo" />
-          <span class="project-tag">Contractor Demo</span>
-        </div>
-        <div class="project-info">
-          <div class="project-meta">
-            <h3>Glory HVAC Service</h3>
-            <svg class="project-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <p>Free demo built for a Clarksville HVAC company — seasonal messaging, emergency callout, and conversion-focused layout. One-time flat fee to go live.</p>
-          <div class="project-chips">
-            <span>Local Business</span>
-            <span>HVAC</span>
-            <span>Middle Tennessee</span>
-          </div>
-        </div>
-      </a>
-            <p class="work-more animate-scroll">Every project built from scratch. <a href="#contact">Yours could be next.</a></p>
     </div>
   </section>
 
-
-  <!-- PROCESS & PRICING -->
-  <section class="process" id="process">
-    <div class="container">
-      <p class="section-label animate-scroll">How it works</p>
-      <div class="process-steps">
-        <div class="process-step animate-scroll">
-          <span class="step-num">01</span>
-          <h3>We talk</h3>
-          <p>Tell me about your business and what you're trying to fix or build. No pitch deck, no agency intake form — just a real conversation.</p>
-        </div>
-        <div class="process-step animate-scroll">
-          <span class="step-num">02</span>
-          <h3>I build it</h3>
-          <p>I scope the project, give you a flat price upfront, and get to work. You'll see real progress fast — not weeks of silence.</p>
-        </div>
-        <div class="process-step animate-scroll">
-          <span class="step-num">03</span>
-          <h3>You own it</h3>
-          <p>The code, the domain, the hosting — it's yours. No subscriptions, no lock-in, no dependency on me to keep the lights on.</p>
-        </div>
-      </div>
-      <div class="pricing-callout animate-scroll">
-        <div class="pricing-left">
-          <p class="section-label" style="margin-bottom:0.75rem">Pricing</p>
-          <h2>Flat rates. No surprises.</h2>
-          <p>Most sites start at <strong>$400</strong>. AI integrations from <strong>$250</strong>. Ongoing support from <strong>$75/mo</strong>. Every project gets a fixed quote before any work begins.</p>
-        </div>
-        <a href="#contact" class="btn">Start a project</a>
-      </div>
+  <section>
+    <div class="section-header">
+      <h2>Why contractors trust me</h2>
+      <p>Built different from agencies. No retainers, no surprises, no disappearing acts.</p>
     </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="container contact-grid">
-      <div class="contact-left animate-scroll">
-        <p class="section-label">Contact</p>
-        <h2>Let's build something.</h2>
-        <p class="contact-sub">Tell me about your business and what you're trying to accomplish. I'll get back to you within a day.</p>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="trust-text">
+          <h4>You own everything</h4>
+          <p>Domain, code, hosting — all yours. No lock-in, no dependency on me.</p>
+        </div>
       </div>
-      <div class="contact-right animate-scroll">
-        <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
-          <input type="hidden" name="access_key" value="d60c2b6a-9c9f-499e-af1a-011b18554c9f" />
-          <input type="hidden" name="redirect" value="false" />
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" type="text" name="name" placeholder="Your name" required />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" placeholder="your@email.com" required />
-          </div>
-          <div class="field">
-            <label for="message">What are you working on?</label>
-            <textarea id="message" name="message" rows="5" placeholder="Tell me about your business..." required></textarea>
-          </div>
-          <button type="submit" class="btn full" id="submit-btn">Send message</button>
-          <div class="form-success" id="form-success">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9l4.5 4.5L15 5" stroke="#4ade80" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Message sent — I'll get back to you within a day.
-          </div>
-        </form>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="trust-text">
+          <h4>Flat $200. Period.</h4>
+          <p>No monthly fees, no hidden costs, no upsells. One price, done.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="trust-text">
+          <h4>Local to Tennessee</h4>
+          <p>Middle Tennessee is home. I understand the market and the customers you're trying to reach.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="trust-text">
+          <h4>Fast turnaround</h4>
+          <p>Demo in 24-48 hours. Live site within a week of approval. No dragging projects.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="trust-text">
+          <h4>Email-first communication</h4>
+          <p>No forced phone calls. I work how you work — text and email, on your schedule.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="trust-text">
+          <h4>Real code, not templates</h4>
+          <p>Hand-built sites that load fast, rank better, and don't break when you need changes.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <section>
+    <div class="pricing-card">
+      <p class="section-header" style="margin-bottom: 0.5rem;"><h2 style="font-size: 1.5rem;">Simple pricing</h2></p>
+      <div class="price">$200</div>
+      <p class="price-note">One-time fee. No monthly charges. Ever.</p>
+      <ul class="pricing-features">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Free demo before you pay
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Custom design & copy
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Mobile-friendly & fast
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Deployed to your domain
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          30 days of small edits
+        </li>
+      </ul>
+      <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Your Free Demo</a>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-header">
+      <h2>Questions & answers</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4>Do I need to already have a domain?</h4>
+        <p>Nope. If you don't have one, I'll help you buy it (usually $10-15/year). If you do, I'll put the site on your existing domain.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if I don't like the demo?</h4>
+        <p>No problem. You keep the link as a reference, and there's no charge or obligation. Most people like what they see, but there's zero pressure.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How long does it take?</h4>
+        <p>Demo: 24-48 hours after you submit the form. Going live: within a week of approval, usually faster.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Are there any monthly fees?</h4>
+        <p>Absolutely not. The $200 is one-time. Your only ongoing cost is domain renewal (~$10-15/year) if you want to keep the site.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can I make changes after it's live?</h4>
+        <p>Yes. I include 30 days of small edits after launch. After that, changes are available at a reasonable hourly rate.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Do you work with businesses outside Tennessee?</h4>
+        <p>Yes, but I specialize in Tennessee contractors and tradespeople. I understand the local market and what your customers are searching for.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Get your free demo</h2>
+        <p>Tell me about your business and I'll build you a custom demo site. No cost, no commitment, no phone call required.</p>
+        <div class="contact-methods">
+          <div class="contact-method">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            caseysandersmcdougal@gmail.com
+          </div>
+          <div class="contact-method">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Middle Tennessee
+          </div>
+        </div>
+      </div>
+      <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="d60c2b6a-9c9f-499e-af1a-011b18554c9f">
+        <input type="hidden" name="redirect" value="false">
+        
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="John Smith" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="business">Business Name</label>
+          <input type="text" id="business" name="business" placeholder="Smith Roofing" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@smithroofing.com" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="service">What services do you offer?</label>
+          <input type="text" id="service" name="service" placeholder="Roofing, gutters, repairs...">
+        </div>
+        
+        <div class="form-group">
+          <label for="location">Where are you located?</label>
+          <input type="text" id="location" name="location" placeholder="Nashville, TN">
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+          Request Free Demo
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        
+        <div class="form-success" id="formSuccess">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Demo request sent! I'll build your site and email you the link within 48 hours.
+        </div>
+      </form>
+    </div>
+  </section>
+
   <footer>
-    <div class="container footer-inner">
-      <span>Casey McDougal</span>
-      <div class="footer-right">
-        <span class="footer-copy">Nashville, TN · 2026</span>
-        <a href="https://www.linkedin.com/in/caseymcdougal/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
-      </div>
+    <div class="container">
+      <p>© 2026 Casey McDougal. Built for Tennessee contractors.</p>
+      <p><a href="mailto:caseysandersmcdougal@gmail.com">caseysandersmcdougal@gmail.com</a></p>
     </div>
   </footer>
 
-  <script src="main.js"></script>
   <script>
-    const form = document.getElementById('contact-form');
-    const btn = document.getElementById('submit-btn');
-    const success = document.getElementById('form-success');
-    if (form) {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        btn.textContent = 'Sending...';
-        btn.disabled = true;
-        const data = new FormData(form);
-        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
-        if (res.ok) {
-          form.reset();
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = 'Sending...';
+      btn.disabled = true;
+      
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: new FormData(this)
+        });
+        
+        if (response.ok) {
+          this.reset();
+          document.getElementById('formSuccess').style.display = 'flex';
           btn.style.display = 'none';
-          success.style.display = 'flex';
         } else {
-          btn.textContent = 'Something went wrong — try again';
-          btn.disabled = false;
+          throw new Error('Submission failed');
         }
-      });
-    }
+      } catch (err) {
+        btn.innerHTML = 'Error — try again';
+        btn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
