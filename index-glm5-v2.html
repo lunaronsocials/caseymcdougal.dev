@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casey McDougal — Web Design for Tennessee Contractors</title>
+  <meta name="description" content="Free demo websites for contractors in Middle Tennessee. See your site before you pay.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #08080a;
+      --bg-elevated: #101014;
+      --glass: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --glass-hover: rgba(255, 255, 255, 0.06);
+      --text: #f4f4f6;
+      --text-muted: #9a9ab0;
+      --text-dim: #5a5a70;
+      --accent: #e07040;
+      --accent-glow: rgba(224, 112, 64, 0.4);
+      --accent-soft: rgba(224, 112, 64, 0.15);
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-pill: 100px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Satoshi', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    /* Ambient background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(224, 112, 64, 0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 80%, rgba(100, 80, 180, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    /* Nav - glass */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(8, 8, 10, 0.6);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    nav .container {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--glass);
+      color: var(--accent) !important;
+      border: 1px solid var(--accent);
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--radius-pill);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px -5px var(--accent-glow);
+    }
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--bg) !important;
+      box-shadow: 0 0 30px -5px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+    /* Hero */
+    .hero {
+      padding: 140px 1.5rem 100px;
+      max-width: 940px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+    .hero-badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-glow);
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      margin-bottom: 1.5rem;
+      max-width: 620px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--text-muted) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.95rem 1.75rem;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, #d06030 100%);
+      color: #fff;
+      box-shadow: 0 4px 20px -5px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px -5px var(--accent-glow);
+    }
+    .btn-secondary {
+      background: var(--glass);
+      color: var(--text);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+    .btn-secondary:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-1px);
+    }
+    /* Sections */
+    section {
+      padding: 100px 1.5rem;
+      max-width: 940px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.6rem, 4vw, 2.25rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.6rem;
+    }
+    .section-header p { color: var(--text-muted); font-size: 1rem; max-width: 480px; }
+    /* Process */
+    .process-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      margin-top: 3.5rem;
+    }
+    .process-steps { display: flex; flex-direction: column; gap: 2.5rem; }
+    .step {
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--border);
+      transition: border-color 0.3s ease;
+    }
+    .step:hover { border-color: var(--accent); }
+    .step-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+    .step h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.4rem; letter-spacing: -0.015em; }
+    .step p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; }
+    .process-visual {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+    }
+    .process-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, var(--accent-soft) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .pricing-big {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    .pricing-note { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 2rem; position: relative; }
+    .pricing-features { display: flex; flex-direction: column; gap: 0.85rem; position: relative; }
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      list-style: none;
+    }
+    .pricing-features svg { color: var(--accent); flex-shrink: 0; }
+    /* Work */
+    .work-featured { margin-top: 3rem; }
+    .work-main {
+      display: block;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      margin-bottom: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(10px);
+    }
+    .work-main:hover {
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+    }
+    .work-main .work-image {
+      aspect-ratio: 16/9;
+      background: var(--bg-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+    .work-main .work-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .work-main:hover .work-image img { transform: scale(1.03); }
+    .work-tag {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      background: rgba(8, 8, 10, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .work-main .work-content {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .work-main .work-content h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .work-main .work-content p { color: var(--text-muted); font-size: 0.88rem; }
+    .work-arrow {
+      color: var(--text-dim);
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+      background: var(--glass);
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+    }
+    .work-main:hover .work-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+    .work-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .work-card {
+      display: block;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      backdrop-filter: blur(10px);
+    }
+    .work-card:hover {
+      border-color: rgba(255,255,255,0.12);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.4);
+    }
+    .work-card .work-image {
+      aspect-ratio: 16/10;
+      background: var(--bg-elevated);
+      position: relative;
+      overflow: hidden;
+    }
+    .work-card .work-image img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .work-card:hover .work-image img { transform: scale(1.03); }
+    .work-card .work-content { padding: 1.25rem; }
+    .work-card .work-content h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .work-card .work-content p { color: var(--text-muted); font-size: 0.82rem; }
+    /* Trust */
+    .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 3rem; }
+    .trust-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    .trust-item:hover {
+      background: var(--glass-hover);
+      border-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+    .trust-icon {
+      width: 40px; height: 40px;
+      background: var(--accent-soft);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .trust-icon svg { width: 20px; height: 20px; color: var(--accent); }
+    .trust-text h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .trust-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;    /* FAQ */
+    .faq-list { max-width: 620px; margin-top: 3rem; }
+    .faq-item {
+      border-bottom: 1px solid var(--glass-border);
+      padding: 1.25rem 0;
+      transition: all 0.3s ease;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--glass-border); }
+    .faq-item:hover { padding-left: 0.5rem; }
+    .faq-item h4 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .faq-item p { color: var(--text-muted); font-size: 0.9rem; padding-right: 1.5rem; line-height: 1.65; }
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 5rem; margin-top: 3rem; }
+    .contact-info h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.85rem; letter-spacing: -0.025em; }
+    .contact-info > p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 1.75rem; }
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+    }
+    .contact-method svg { color: var(--accent); flex-shrink: 0; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 0.92rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+    .form-group textarea { min-height: 110px; resize: vertical; }
+    .form-success {
+      display: none;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1rem 1.35rem;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 0.85rem;
+    }
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 2.5rem 1.5rem;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+    }
+    footer .container {
+      max-width: 940px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer p { color: var(--text-dim); font-size: 0.82rem; }
+    footer a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .hero { padding: 110px 1.5rem 70px; }
+      .hero-cta { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .process-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .work-row { grid-template-columns: 1fr; }
+      .trust-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="#" class="logo">Casey McDougal</a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact" class="nav-cta">Get Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge"><span class="dot"></span> Middle Tennessee</div>
+    <h1>I build free demos. You decide if it's worth paying for.</h1>
+    <p class="hero-sub">No calls, no pressure, no upfront cost. Custom demo sites for contractors and tradespeople. Like it? $250 to start, $250 on completion. Don't? No hard feelings.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get Your Free Demo</a>
+      <a href="#work" class="btn btn-secondary">See Recent Work</a>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="section-header">
+      <div class="section-label">How It Works</div>
+      <h2>Three steps. Zero risk.</h2>
+      <p>You see exactly what you're getting before making any decision.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Tell me about your business</h3>
+          <p>Fill out a short form — business name, services, location. Takes 2 minutes. No phone call.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>I build your demo in 24-48 hours</h3>
+          <p>I research your business, write the copy, and build a complete site. You get a live link.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>You decide if you want it</h3>
+          <p>Like it? $250 deposit, $250 on completion. Don't? Keep the link as reference, no charge.</p>
+        </div>
+      </div>
+      <div class="process-visual">
+        <div class="pricing-big">$500</div>
+        <div class="pricing-note">$250 deposit + $250 on completion. No monthly fees.</div>
+        <ul class="pricing-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Free demo before you pay</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Deployed to your domain</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 30 days of edits included</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-header">
+      <div class="section-label">Portfolio</div>
+      <h2>Recent demos and live sites</h2>
+      <p>Every site built from scratch for real Tennessee businesses.</p>
+    </div>
+    <div class="work-featured">
+      <a href="https://ironwood-barber.pages.dev/" target="_blank" class="work-main">
+        <div class="work-image">
+          <img src="ironwood-preview.png" alt="Ironwood Barber Co.">
+          <span class="work-tag">Live Site</span>
+        </div>
+        <div class="work-content">
+          <div>
+            <h3>Ironwood Barber Co.</h3>
+            <p>Full site for a Nashville barbershop with booking and gallery.</p>
+          </div>
+          <svg class="work-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+      <div class="work-row">
+        <a href="https://linden-rye.pages.dev/" target="_blank" class="work-card">
+          <div class="work-image">
+            <img src="lindenrye-preview.png" alt="Linden and Rye">
+            <span class="work-tag">Live Site</span>
+          </div>
+          <div class="work-content">
+            <h3>Linden & Rye</h3>
+            <p>Nashville artisan bakery with menu and ordering.</p>
+          </div>
+        </a>
+        <a href="https://kettleblack-coffee.pages.dev/" target="_blank" class="work-card">
+          <div class="work-image">
+            <img src="kettleblack-preview.png" alt="Kettle Black Coffee">
+            <span class="work-tag">Live Site</span>
+          </div>
+          <div class="work-content">
+            <h3>Kettle Black Coffee</h3>
+            <p>East Nashville coffee shop with menu and location.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="trust">
+    <div class="section-header">
+      <div class="section-label">Why Me</div>
+      <h2>What you get</h2>
+      <p>Built different from agencies. No retainers, no surprises.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="trust-text"><h4>You own everything</h4><p>Domain, code, hosting — all yours. No lock-in.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="trust-text"><h4>Fast turnaround</h4><p>Demo in 24-48 hours. Live within a week.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="trust-text"><h4>Email-first</h4><p>No forced calls. Work how you work.</p></div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="trust-text"><h4>Real code</h4><p>Hand-built, fast loading, no templates.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-header">
+      <div class="section-label">FAQ</div>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><h4>Do I need a domain already?</h4><p>Nope. If you don't have one, I'll help you buy it for around $10-15/year.</p></div>
+      <div class="faq-item"><h4>What if I don't like the demo?</h4><p>No problem. You keep the link as reference, no charge, no hard feelings.</p></div>
+      <div class="faq-item"><h4>How long does it take?</h4><p>Demo: 24-48 hours. Going live: within a week of approval, usually faster.</p></div>
+      <div class="faq-item"><h4>Any monthly fees?</h4><p>None. $500 total, then you own it. Only ongoing cost is domain renewal.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Get your free demo</h2>
+        <p>Tell me about your business and I'll build you a custom demo site. No cost, no commitment, no phone call required.</p>
+        <div class="contact-method"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> caseysandersmcdougal@gmail.com</div>
+        <div class="contact-method"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Middle Tennessee</div>
+      </div>
+      <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="d60c2b6a-9c9f-499e-af1a-011b18554c9f">
+        <input type="hidden" name="redirect" value="false">
+        <div class="form-group"><label for="name">Your Name</label><input type="text" id="name" name="name" placeholder="John Smith" required></div>
+        <div class="form-group"><label for="business">Business Name</label><input type="text" id="business" name="business" placeholder="Smith Roofing" required></div>
+        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="john@smithroofing.com" required></div>
+        <div class="form-group"><label for="service">What services do you offer?</label><input type="text" id="service" name="service" placeholder="Roofing, gutters, repairs..."></div>
+        <div class="form-group"><label for="location">Where are you located?</label><input type="text" id="location" name="location" placeholder="Nashville, TN"></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Request Free Demo</button>
+        <div class="form-success" id="formSuccess"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Demo request sent! I'll email you the link within 48 hours.</div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Casey McDougal. Built for Tennessee contractors.</p>
+      <p><a href="mailto:caseysandersmcdougal@gmail.com">caseysandersmcdougal@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('button[type="submit"]');
+      btn.innerHTML = 'Sending...';
+      btn.disabled = true;
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+        if (response.ok) {
+          this.reset();
+          document.getElementById('formSuccess').style.display = 'flex';
+          btn.style.display = 'none';
+        } else { throw new Error('Failed'); }
+      } catch (err) { btn.innerHTML = 'Error — try again'; btn.disabled = false; }
+    });
+  </script>
+</body>
+</html>
