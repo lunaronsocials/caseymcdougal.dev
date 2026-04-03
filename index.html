@@ -600,6 +600,21 @@
       padding: 2rem;
       box-shadow: var(--shadow);
     }
+    .kit-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .kit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: rgba(0,0,0,0.02);
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+    .kit-item:hover { background: rgba(0,113,227,0.05); }
+    .kit-icon { font-size: 1rem; flex-shrink: 0; }
+    .kit-text { display: flex; flex-direction: column; gap: 0.15rem; }
+    .kit-text strong { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .kit-text span { font-size: 0.8rem; color: var(--text-secondary); }
     .subscribe-input-wrap {
       display: flex;
       gap: 0.75rem;
@@ -846,7 +861,7 @@
     <div class="section-header">
       <div class="section-eyebrow">Newsletter</div>
       <h2>Get the No-Code Automation Starter Kit</h2>
-      <p>Free templates + weekly teardowns on building and selling automations with n8n. Join 0 others learning to make money without writing code.</p>
+      <p>5 n8n workflows that would've taken me 158 sites to figure out. Free. Join 97 others already inside.</p>
     </div>
     <div class="subscribe-card">
       <form action="https://assets.mailerlite.com/jsonp/2241553/forms/183689485189383868/subscribe" method="post" target="_blank">
@@ -856,8 +871,48 @@
           <input type="email" name="fields[email]" placeholder="your@email.com" required class="subscribe-input" aria-label="Email">
           <button type="submit" class="btn btn-primary">Get Free Templates →</button>
         </div>
-        <p class="subscribe-note">Free starter kit included. Unsubscribe anytime.</p>
+        <p class="subscribe-note">Free starter kit + early access to the course ($99 value) when it drops. Unsubscribe anytime.</p>
       </form>
+      <div class="kit-preview" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+        <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-secondary);">What's inside:</h4>
+        <div class="kit-list">
+          <div class="kit-item">
+            <span class="kit-icon">1️⃣</span>
+            <div class="kit-text">
+              <strong>Scrape → Qualify</strong>
+              <span>Find leads anywhere, auto-filter by criteria</span>
+            </div>
+          </div>
+          <div class="kit-item">
+            <span class="kit-icon">2️⃣</span>
+            <div class="kit-text">
+              <strong>Enrich → Store</strong>
+              <span>Append data, save to Sheets/Airtable</span>
+            </div>
+          </div>
+          <div class="kit-item">
+            <span class="kit-icon">3️⃣</span>
+            <div class="kit-text">
+              <strong>Outreach → Schedule</strong>
+              <span>Trigger emails/messages at the right time</span>
+            </div>
+          </div>
+          <div class="kit-item">
+            <span class="kit-icon">4️⃣</span>
+            <div class="kit-text">
+              <strong>Follow-up → Nurture</strong>
+              <span>Sequence for non-responders (never ghost again)</span>
+            </div>
+          </div>
+          <div class="kit-item">
+            <span class="kit-icon">5️⃣</span>
+            <div class="kit-text">
+              <strong>Report → Track</strong>
+              <span>Dashboard view of what's working</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
