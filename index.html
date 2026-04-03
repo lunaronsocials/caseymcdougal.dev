@@ -849,16 +849,14 @@
       <p>One email per week. What I'm building, what broke, what I learned. No fluff.</p>
     </div>
     <div class="subscribe-card">
-      <form id="subscribeForm" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="d60c2b6a-9c9f-499e-af1a-011b18554c9f">
-        <input type="hidden" name="redirect" value="false">
-        <input type="hidden" name="subject" value="New Newsletter Subscriber">
+      <form action="https://assets.mailerlite.com/jsonp/2241553/forms/183689485189383868/subscribe" method="post" target="_blank">
+        <input type="hidden" name="ml-submit" value="1">
+        <input type="hidden" name="anticsrf" value="true">
         <div class="subscribe-input-wrap">
-          <input type="email" name="email" placeholder="your@email.com" required class="subscribe-input">
+          <input type="email" name="fields[email]" placeholder="your@email.com" required class="subscribe-input" aria-label="Email">
           <button type="submit" class="btn btn-primary">Subscribe →</button>
         </div>
-        <p class="subscribe-note">Join 0 others. Unsubscribe anytime.</p>
-        <div class="form-success" id="formSuccess">✓ You're on the list. First email soon.</div>
+        <p class="subscribe-note">No fluff. Unsubscribe anytime.</p>
       </form>
     </div>
   </section>
