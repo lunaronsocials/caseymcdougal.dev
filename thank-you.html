@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanks — No-Code Automation Starter Kit</title>
+  <meta name="description" content="Your n8n automation templates are ready for download.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent: #0071e3;
+      --accent-glow: rgba(0,113,227,0.15);
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+      --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --check: #34c759;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #5e5ce6);
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, rgba(52,199,89,0.1) 0%, rgba(52,199,89,0.05) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: var(--check);
+      font-size: 1.75rem;
+      border: 1px solid rgba(52,199,89,0.2);
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 100px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s var(--ease);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 16px rgba(0,113,227,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    .btn:hover::before {
+      left: 100%;
+    }
+    .btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(0,113,227,0.4);
+    }
+    .kit-preview {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+    .kit-preview h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .kit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .kit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .kit-item::before {
+      content: '✓';
+      color: var(--check);
+      font-weight: 700;
+      width: 16px;
+    }
+    .back {
+      margin-top: 1.5rem;
+      display: inline-block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
+    .back:hover {
+      color: var(--accent);
+    }
+    .note {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      background: rgba(0,0,0,0.03);
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+    }
+    @media (max-width: 480px) {
+      .card {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="icon">✓</div>
+      <h1>Check your email</h1>
+      <p>I just sent you a confirmation. Once you confirm, you'll get the download link via email. (Check spam if you don't see it in a minute.)</p>
+      
+      <a href="assets/downloads/No-Code-Automation-Starter-Kit.zip" download class="btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Now
+      </a>
+      
+      <p class="note" style="margin-top: 1.5rem;">
+        Or grab it directly here if you don't want to wait for the email.
+      </p>
+
+      <div class="kit-preview">
+        <h3>What's inside (9.7 KB):</h3>
+        <div class="kit-list">
+          <div class="kit-item">Scrape → Qualify workflow</div>
+          <div class="kit-item">Enrich → Store workflow</div>
+          <div class="kit-item">Outreach → Schedule workflow</div>
+          <div class="kit-item">Follow-up → Nurture workflow</div>
+          <div class="kit-item">Report → Track workflow</div>
+        </div>
+      </div>
+    </div>
+    
+    <a href="/" class="back">← Back to caseymcdougal.dev</a>
+  </div>
+</body>
+</html>

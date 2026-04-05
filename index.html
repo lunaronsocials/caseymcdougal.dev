@@ -403,9 +403,9 @@
       font-weight: 500;
     }
     /* Work Grid */
-    .work-grid { 
-      display: grid; 
-      grid-template-columns: repeat(3, 1fr); 
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.25rem; 
     }
     @media (max-width: 900px) { .work-grid { grid-template-columns: 1fr; } }
@@ -611,7 +611,47 @@
       transition: all 0.3s;
     }
     .kit-item:hover { background: rgba(0,113,227,0.05); }
-    .kit-icon { font-size: 1rem; flex-shrink: 0; }
+    .kit-dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      margin-top: 0;
+    }
+    .kit-item.expanded .kit-dropdown {
+      max-height: 400px;
+      margin-top: 0.75rem;
+    }
+    .kit-item.expanded .chevron {
+      transform: rotate(180deg);
+    }
+    .chevron {
+      transition: transform 0.3s ease;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      margin-left: auto;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .kit-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      cursor: pointer;
+    }
+    .kit-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .kit-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 0.15rem;
+    }
+    .kit-icon { font-size: 0.75rem; font-weight: 700; color: var(--accent); width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; background: rgba(0,113,227,0.08); border-radius: 50%; flex-shrink: 0; }
     .kit-text { display: flex; flex-direction: column; gap: 0.15rem; }
     .kit-text strong { font-size: 0.85rem; font-weight: 600; color: var(--text); }
     .kit-text span { font-size: 0.8rem; color: var(--text-secondary); }
@@ -751,7 +791,7 @@
   <section class="hero">
     <div class="hero-badge">
       <span class="dot"></span>
-      Building in public since April 2026
+      Building in public
     </div>
     <h1>I automated <span class="gradient-text">158 sites</span>. Then I found n8n.</h1>
     <p class="hero-sub">18 y/o builder documenting how to make real money with no-code automation. Templates, teardowns, and the stuff nobody else shows you.</p>
@@ -831,17 +871,6 @@
           <div class="work-meta"><span>Node.js</span><span>Firecrawl</span><span>Gemini</span></div>
         </div>
       </a>
-      <a href="#" class="work-card">
-        <div class="work-image" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); display: flex; align-items: center; justify-content: center;">
-          <span style="font-size: 2rem;">📊</span>
-          <span class="work-tag">Experiment</span>
-        </div>
-        <div class="work-content">
-          <h3>The Numbers</h3>
-          <p>Tracking everything: pitches sent, replies, conversions, Reddit views, Twitter follows. Data over intuition.</p>
-          <div class="work-meta"><span>Tracking</span><span>Transparency</span></div>
-        </div>
-      </a>
       <a href="https://twitter.com/caseymcdougal" target="_blank" class="work-card">
         <div class="work-image" style="background: linear-gradient(135deg, #000 0%, #16181c 100%); display: flex; align-items: center; justify-content: center;">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -864,51 +893,82 @@
       <p>5 n8n workflows that would've taken me 158 sites to figure out. Free. Join 97 others already inside.</p>
     </div>
     <div class="subscribe-card">
-      <form action="https://assets.mailerlite.com/jsonp/2241553/forms/183689485189383868/subscribe" method="post" target="_blank">
+      <form id="newsletter-form" action="https://assets.mailerlite.com/jsonp/2241553/forms/183689485189383868/subscribe" method="post" target="_blank">
         <input type="hidden" name="ml-submit" value="1">
         <input type="hidden" name="anticsrf" value="true">
         <div class="subscribe-input-wrap">
           <input type="email" name="fields[email]" placeholder="your@email.com" required class="subscribe-input" aria-label="Email">
-          <button type="submit" class="btn btn-primary">Get Free Templates →</button>
+          <button type="submit" class="btn btn-primary" onclick="setTimeout(function(){ window.location.href='thank-you.html'; }, 500); return true;">Get Free Templates →</button>
         </div>
-        <p class="subscribe-note">Free starter kit + early access to the course ($99 value) when it drops. Unsubscribe anytime.</p>
+        <p class="subscribe-note">Free starter kit + early access to the course when it drops. Unsubscribe anytime.</p>
       </form>
+      <p style="margin-top: 1rem; font-size: 0.82rem; color: var(--text-secondary); text-align: center;">Built by <a href="https://twitter.com/caseymcdougal" target="_blank" style="color: var(--accent); font-weight: 500;">@caseymcdougal</a> — 18 y/o, 158 sites, $0 revenue. Now teaching what I learned.</p>
       <div class="kit-preview" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
-        <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-secondary);">What's inside:</h4>
+        <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--text-secondary);">What's inside (click to preview):</h4>
         <div class="kit-list">
-          <div class="kit-item">
-            <span class="kit-icon">1️⃣</span>
-            <div class="kit-text">
-              <strong>Scrape → Qualify</strong>
-              <span>Find leads anywhere, auto-filter by criteria</span>
+          <div class="kit-item" onclick="this.classList.toggle('expanded')">
+            <div class="kit-header">
+              <span class="kit-icon">1</span>
+              <div class="kit-text">
+                <div class="kit-name">Scrape → Qualify</div>
+                <div class="kit-desc">Find leads anywhere, auto-filter by criteria</div>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+            <div class="kit-dropdown">
+              <img src="assets/screenshots/Workflow1.png" alt="Scrape → Qualify workflow" style="width: 100%; border-radius: 12px; border: 1px solid var(--border); margin-top: 0.5rem;">
             </div>
           </div>
-          <div class="kit-item">
-            <span class="kit-icon">2️⃣</span>
-            <div class="kit-text">
-              <strong>Enrich → Store</strong>
-              <span>Append data, save to Sheets/Airtable</span>
+          <div class="kit-item" onclick="this.classList.toggle('expanded')">
+            <div class="kit-header">
+              <span class="kit-icon">2</span>
+              <div class="kit-text">
+                <div class="kit-name">Enrich → Store</div>
+                <div class="kit-desc">Append data, save to Sheets/Airtable</div>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+            <div class="kit-dropdown">
+              <img src="assets/screenshots/Workflow2.png" alt="Enrich → Store workflow" style="width: 100%; border-radius: 12px; border: 1px solid var(--border); margin-top: 0.5rem;">
             </div>
           </div>
-          <div class="kit-item">
-            <span class="kit-icon">3️⃣</span>
-            <div class="kit-text">
-              <strong>Outreach → Schedule</strong>
-              <span>Trigger emails/messages at the right time</span>
+          <div class="kit-item" onclick="this.classList.toggle('expanded')">
+            <div class="kit-header">
+              <span class="kit-icon">3</span>
+              <div class="kit-text">
+                <div class="kit-name">Outreach → Schedule</div>
+                <div class="kit-desc">Trigger emails/messages at the right time</div>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+            <div class="kit-dropdown">
+              <img src="assets/screenshots/Workflow3.png" alt="Outreach → Schedule workflow" style="width: 100%; border-radius: 12px; border: 1px solid var(--border); margin-top: 0.5rem;">
             </div>
           </div>
-          <div class="kit-item">
-            <span class="kit-icon">4️⃣</span>
-            <div class="kit-text">
-              <strong>Follow-up → Nurture</strong>
-              <span>Sequence for non-responders (never ghost again)</span>
+          <div class="kit-item" onclick="this.classList.toggle('expanded')">
+            <div class="kit-header">
+              <span class="kit-icon">4</span>
+              <div class="kit-text">
+                <div class="kit-name">Follow-up → Nurture</div>
+                <div class="kit-desc">Sequence for non-responders (never ghost again)</div>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+            <div class="kit-dropdown">
+              <img src="assets/screenshots/Workflow4.png" alt="Follow-up → Nurture workflow" style="width: 100%; border-radius: 12px; border: 1px solid var(--border); margin-top: 0.5rem;">
             </div>
           </div>
-          <div class="kit-item">
-            <span class="kit-icon">5️⃣</span>
-            <div class="kit-text">
-              <strong>Report → Track</strong>
-              <span>Dashboard view of what's working</span>
+          <div class="kit-item" onclick="this.classList.toggle('expanded')">
+            <div class="kit-header">
+              <span class="kit-icon">5</span>
+              <div class="kit-text">
+                <div class="kit-name">Report → Track</div>
+                <div class="kit-desc">Dashboard view of what's working</div>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+            <div class="kit-dropdown">
+              <img src="assets/screenshots/Workflow5.png" alt="Report → Track workflow" style="width: 100%; border-radius: 12px; border: 1px solid var(--border); margin-top: 0.5rem;">
             </div>
           </div>
         </div>
