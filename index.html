@@ -995,11 +995,49 @@
       <h2>A library, not a launch.</h2>
       <p>Free workflow kits for builders. One email unlocks every kit. Current and future. No upsell, no funnels.</p>
     </div>
-    <div class="kits-intro subscribe-card" style="display:flex; flex-direction:column; align-items:center; gap: 1rem;">
-      <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-      <iframe src="https://subscribe-forms.beehiiv.com/f05c2d28-67de-4bd4-b1f9-793a4cdce4c7" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 516px; height: 291px; margin: 0; border-radius: 0; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
-      <a href="library.html" class="btn btn-primary" style="text-decoration:none;">enter the library →</a>
-      <p class="subscribe-note" style="margin-top: 0.25rem;">Subscribe above, then click through. Paid course later — kits stay free, forever.</p>
+    <div class="kits-intro subscribe-card">
+      <form id="newsletter-form" novalidate>
+        <div class="subscribe-input-wrap">
+          <input type="email" name="email" placeholder="your@email.com" required class="subscribe-input" aria-label="Email">
+          <button type="submit" class="btn btn-primary" id="newsletter-submit">unlock the library →</button>
+        </div>
+        <p class="subscribe-note" id="newsletter-note">Paid course later. Kits stay free, forever.</p>
+      </form>
+      <script>
+        (function () {
+          var form = document.getElementById('newsletter-form');
+          var btn = document.getElementById('newsletter-submit');
+          var note = document.getElementById('newsletter-note');
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var email = form.email.value.trim();
+            if (!email) return;
+            btn.disabled = true;
+            var original = btn.textContent;
+            btn.textContent = 'unlocking…';
+            fetch('/api/subscribe', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email })
+            }).then(function (r) {
+              return r.json().then(function (j) { return { ok: r.ok && j.ok, j: j }; });
+            }).then(function (res) {
+              if (res.ok) {
+                note.textContent = "you're in. redirecting…";
+                setTimeout(function () { window.location.href = 'library.html'; }, 600);
+              } else {
+                btn.disabled = false;
+                btn.textContent = original;
+                note.textContent = "something broke. try again or email casey directly.";
+              }
+            }).catch(function () {
+              btn.disabled = false;
+              btn.textContent = original;
+              note.textContent = "network error. try again.";
+            });
+          });
+        })();
+      </script>
     </div>
 
     <div class="kits-grid">
