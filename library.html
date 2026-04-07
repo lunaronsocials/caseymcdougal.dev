@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Library · caseymcdougal.dev</title>
+  <meta name="description" content="The private kits library for subscribers. Read the full teardown, grab the workflows, add the skills.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --surface: #ffffff;
+      --text: #0c0c0d;
+      --text-secondary: #6b6862;
+      --accent: #0c0c0d;
+      --accent-hot: #ff5a1f;
+      --accent-glow: rgba(255,90,31,0.12);
+      --border: rgba(12,12,13,0.12);
+      --shadow: 0 4px 24px rgba(12,12,13,0.05);
+      --shadow-lg: 0 12px 48px rgba(12,12,13,0.10);
+      --ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    .glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(120px);
+      opacity: 0.55;
+      width: 640px;
+      height: 640px;
+      background: radial-gradient(circle, rgba(255,90,31,0.18) 0%, transparent 70%);
+      top: -15%;
+      right: -10%;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.05;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 6rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: lowercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s var(--ease);
+    }
+    .back-link:hover {
+      color: var(--accent-hot);
+      border-color: var(--accent-hot);
+      transform: translateX(-2px);
+    }
+
+    header.hero {
+      margin-top: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-hot);
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--accent-hot);
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+      background: var(--accent-glow);
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    h1 em {
+      font-style: normal;
+      color: var(--accent-hot);
+    }
+    .lede {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 620px;
+    }
+    .lede code {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      background: rgba(12,12,13,0.06);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .kit {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.25rem 2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .kit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-hot), transparent);
+    }
+    .kit-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .kit-head .id { color: var(--accent-hot); }
+    .status {
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+      background: rgba(34,197,94,0.1);
+      color: #16a34a;
+      border: 1px solid rgba(34,197,94,0.3);
+    }
+    .kit h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .kit > p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .kit > p em {
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .inside-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 0.9rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .piece {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      margin-top: 0.6rem;
+      background: rgba(245,243,238,0.5);
+    }
+    .piece-head {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .piece-icon {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent-hot);
+      font-weight: 700;
+      padding-top: 0.15rem;
+    }
+    .piece-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+    .piece-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+    .piece-detail {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-top: 0.6rem;
+      padding-top: 0.6rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-row {
+      margin-top: 1.75rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      transition: all 0.3s var(--ease);
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(12,12,13,0.2);
+      background: var(--accent-hot);
+      border-color: var(--accent-hot);
+    }
+    .btn-hot {
+      background: var(--accent-hot);
+      border-color: var(--accent-hot);
+    }
+    .btn-hot:hover {
+      background: #e84a10;
+      border-color: #e84a10;
+    }
+    .btn-note {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-transform: lowercase;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      text-transform: lowercase;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .meta span::before { content: '· '; color: var(--accent-hot); }
+    .meta span:first-child::before { content: ''; }
+
+    .note {
+      margin-top: 2.5rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--accent-hot);
+      background: rgba(255,90,31,0.04);
+      border-radius: 0 12px 12px 0;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    .note strong { color: var(--text); }
+
+    @media (max-width: 640px) {
+      main { padding: 2.5rem 1rem 4rem; }
+      .kit { padding: 1.75rem 1.25rem; }
+      .kit h2 { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <main>
+    <a href="/" class="back-link">← back to site</a>
+
+    <header class="hero">
+      <div class="eyebrow">the library · subscribers only</div>
+      <h1>You're in. Here's <em>everything</em>.</h1>
+      <p class="lede">Two live kits, no funnels, no upsell. Kit 01 is a full teardown of a failed pipeline — workflows, prompts, pitches. Kit 02 is a private Claude Code skill that turns taste into shipped sites. Both yours.</p>
+    </header>
+
+    <!-- Kit 01 -->
+    <section class="kit">
+      <div class="kit-head">
+        <span class="id">kit_01</span>
+        <span class="status">live</span>
+      </div>
+      <h2>158 Sites, $0: The Vantage Teardown</h2>
+      <p>The full autopsy of my failed lead-gen pipeline. Every workflow, prompt, and pitch, plus a written post-mortem of why it broke at <em>conversion</em>, not code. The failure is the moat: you can't drag-and-drop scar tissue.</p>
+
+      <div class="inside-label">inside the teardown</div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[01]</span>
+          <div>
+            <div class="piece-title">The full pipeline (n8n + code)</div>
+            <div class="piece-desc">Workflow exports, scraper config, deploy script. Fork the whole thing.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Firecrawl → Gemini → batch deploy. The exact node graph and the glue code that templates leave out: rate-limit handling, retry logic, dedupe, the JSON schema I landed on after site #40.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[02]</span>
+          <div>
+            <div class="piece-title">The prompt vault</div>
+            <div class="piece-desc">Every LLM prompt I shipped, every variant, with notes on what broke.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Industry-classifier prompts, copy-generation prompts, the one that hallucinated phone numbers, the one that finally stopped. With diffs so you can see how I got from v1 to v9.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[03]</span>
+          <div>
+            <div class="piece-title">The pitch graveyard</div>
+            <div class="piece-desc">124 real pitches, redacted, annotated with what I'd change now.</div>
+          </div>
+        </div>
+        <p class="piece-detail">The cold emails, the DMs, the follow-ups. Subject lines, open rates where I have them, replies (rare), and the one near-close that taught me distribution beats automation.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[04]</span>
+          <div>
+            <div class="piece-title">Where it actually broke</div>
+            <div class="piece-desc">A written post-mortem. Not "iterate faster," real failure modes.</div>
+          </div>
+        </div>
+        <p class="piece-detail">The technical pipeline worked. The business pipeline didn't. This is the section nobody on n8n.io can write because they didn't ship the failure first. Bottlenecks, false signals, the tells I missed.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[05]</span>
+          <div>
+            <div class="piece-title">Site #1, redo</div>
+            <div class="piece-desc">If I started over tomorrow. The pipeline I'd actually run.</div>
+          </div>
+        </div>
+        <p class="piece-detail">The smaller, slower, distribution-first version. What I'd cut, what I'd keep, where I'd put the human in the loop, and the one metric I'd watch instead of "sites deployed."</p>
+      </div>
+
+      <div class="cta-row">
+        <a href="assets/downloads/No-Code-Automation-Starter-Kit.zip" download class="btn btn-hot">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          download the workflows
+        </a>
+        <span class="btn-note">.zip · n8n + prompts + pitches</span>
+      </div>
+
+      <div class="meta">
+        <span>n8n export</span>
+        <span>124 pitches</span>
+        <span>post-mortem</span>
+        <span>+ raw workflows</span>
+      </div>
+    </section>
+
+    <!-- Kit 02 -->
+    <section class="kit">
+      <div class="kit-head">
+        <span class="id">kit_02</span>
+        <span class="status">live</span>
+      </div>
+      <h2>PonderUI — one-shot sites for any niche</h2>
+      <p>A private Claude Code skill that one-shots glass + neuo landing pages with a hard anti-AI-tell filter. Pick a niche, run it, ship a site that actually looks shipped. Built to turn taste into cash, fast.</p>
+
+      <div class="inside-label">what it does</div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[01]</span>
+          <div>
+            <div class="piece-title">Taste, enforced</div>
+            <div class="piece-desc">Built on Leonxlnx's taste-skill, layered with a stricter anti-AI-tell catalog.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Zero em dashes. No purple-pink AI gradients. No Sparkles icon. No "Get Started / Learn More" CTA pair. No three-col Features grid with icon+heading+lorem. No Supercharge/Unleash/Transform copy. The tells that scream "AI slop" are blocked at the skill level.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[02]</span>
+          <div>
+            <div class="piece-title">A real visual vocabulary</div>
+            <div class="piece-desc">Glass, neuo, and hybrid — with rules for when each one actually works.</div>
+          </div>
+        </div>
+        <p class="piece-detail">8 reference docs: anti-ai-tells, glassmorphism, neumorphism, hybrid glass-neuo, spacing rhythm, color systems, typography, motion. Glass has to be earned against a rich background. Neuo base must share color with its surface. Hybrid only works one way.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[03]</span>
+          <div>
+            <div class="piece-title">Templates + examples, not lorem</div>
+            <div class="piece-desc">4 page templates, 5 components, 3 full example sites to fork.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Landing, pricing, dashboard, auth. Button, card, nav, modal, input. Plus three real example sites: Loomwright (SaaS landing), Iris Park (portfolio), Tidewater (neuo+glass dashboard). Something to point Claude at instead of "make it look nice."</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[04]</span>
+          <div>
+            <div class="piece-title">A binary QA gate before you ship</div>
+            <div class="piece-desc">A pre-ship checklist that catches the tells before a client does.</div>
+          </div>
+        </div>
+        <p class="piece-detail">The stuff you'd forget to check at 1am: infinite float animations, backdrop-blur spam, glass over flat backgrounds, copy that sounds like a landing page generator wrote it. Binary. Pass or fix.</p>
+      </div>
+
+      <div class="cta-row">
+        <a href="https://github.com/caseymcdougal/ponderui" target="_blank" rel="noopener" class="btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8 0 3.2a4.6 4.6 0 0 1 1.2 3.2c0 4.6-2.8 5.6-5.5 5.9.5.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/>
+          </svg>
+          add the skill →
+        </a>
+        <span class="btn-note">private repo · request access if locked</span>
+      </div>
+
+      <div class="meta">
+        <span>Claude Code skill</span>
+        <span>glass + neuo</span>
+        <span>anti-AI-tell filter</span>
+        <span>built on taste-skill</span>
+      </div>
+    </section>
+
+    <div class="note">
+      <strong>Heads up:</strong> bookmark this page. New kits get added here as they ship, and subscribers get them first. If the PonderUI repo shows 404, reply to the welcome email with your GitHub username and I'll add you as a collaborator.
+    </div>
+  </main>
+</body>
+</html>
