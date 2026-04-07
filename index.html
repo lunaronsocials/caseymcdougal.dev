@@ -995,7 +995,7 @@
       <h2>A library, not a launch.</h2>
       <p>Free workflow kits for builders. One email unlocks every kit. Current and future. No upsell, no funnels.</p>
     </div>
-    <div class="kits-intro subscribe-card">
+    <div class="kits-intro subscribe-card" id="subscribe-card">
       <form id="newsletter-form" novalidate>
         <div class="subscribe-input-wrap">
           <input type="email" name="email" placeholder="your@email.com" required class="subscribe-input" aria-label="Email">
@@ -1003,11 +1003,28 @@
         </div>
         <p class="subscribe-note" id="newsletter-note">Paid course later. Kits stay free, forever.</p>
       </form>
+      <div id="welcome-back" style="display:none; text-align:center;">
+        <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.35rem;">hey, welcome back 👋</p>
+        <p class="subscribe-note" style="margin-bottom: 1rem;">you're already on the list. the library's right where you left it.</p>
+        <a href="library.html" class="btn btn-primary" style="text-decoration:none;">open the library →</a>
+      </div>
       <script>
         (function () {
+          var SUB_KEY = 'cmd_subscribed_v1';
           var form = document.getElementById('newsletter-form');
+          var welcome = document.getElementById('welcome-back');
           var btn = document.getElementById('newsletter-submit');
           var note = document.getElementById('newsletter-note');
+
+          // Returning subscriber: skip the form entirely.
+          try {
+            if (localStorage.getItem(SUB_KEY)) {
+              form.style.display = 'none';
+              welcome.style.display = 'block';
+              return;
+            }
+          } catch (e) { /* localStorage blocked, fall through to form */ }
+
           form.addEventListener('submit', function (e) {
             e.preventDefault();
             var email = form.email.value.trim();
@@ -1023,6 +1040,7 @@
               return r.json().then(function (j) { return { ok: r.ok && j.ok, j: j }; });
             }).then(function (res) {
               if (res.ok) {
+                try { localStorage.setItem(SUB_KEY, '1'); } catch (e) {}
                 note.textContent = "you're in. redirecting…";
                 setTimeout(function () { window.location.href = 'library.html'; }, 600);
               } else {
