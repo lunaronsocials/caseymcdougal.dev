@@ -995,26 +995,11 @@
       <h2>A library, not a launch.</h2>
       <p>Free workflow kits for builders. One email unlocks every kit. Current and future. No upsell, no funnels.</p>
     </div>
-    <div class="kits-intro subscribe-card" style="display:flex; flex-direction:column; align-items:center;">
+    <div class="kits-intro subscribe-card" style="display:flex; flex-direction:column; align-items:center; gap: 1rem;">
       <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
       <iframe src="https://subscribe-forms.beehiiv.com/f05c2d28-67de-4bd4-b1f9-793a4cdce4c7" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 516px; height: 291px; margin: 0; border-radius: 0; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
-      <p class="subscribe-note" style="margin-top: 0.5rem;">Paid course later. Kits stay free, forever. <a href="library.html" style="color: var(--accent-hot); text-decoration: none; font-weight: 600;">Already subscribed? Enter the library →</a></p>
-      <script>
-        // Beehiiv iframe posts a message on successful subscription. Redirect to the library.
-        window.addEventListener('message', function(e) {
-          if (e.origin && e.origin.indexOf('beehiiv.com') !== -1) {
-            var d = e.data;
-            var isSuccess = d && (
-              d === 'subscribe' ||
-              (typeof d === 'string' && d.toLowerCase().indexOf('success') !== -1) ||
-              (typeof d === 'object' && (d.event === 'subscribe' || d.type === 'subscribe' || d.status === 'success'))
-            );
-            if (isSuccess) {
-              setTimeout(function(){ window.location.href = 'library.html'; }, 800);
-            }
-          }
-        });
-      </script>
+      <a href="library.html" class="btn btn-primary" style="text-decoration:none;">enter the library →</a>
+      <p class="subscribe-note" style="margin-top: 0.25rem;">Subscribe above, then click through. Paid course later — kits stay free, forever.</p>
     </div>
 
     <div class="kits-grid">
