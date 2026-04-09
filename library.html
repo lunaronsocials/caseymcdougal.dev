@@ -317,7 +317,7 @@
     <header class="hero">
       <div class="eyebrow">the library · subscribers only</div>
       <h1>You're in. Here's <em>everything</em>.</h1>
-      <p class="lede">Three live kits, no funnels, no upsell. Kit 01 is a teardown of a failed pipeline. Kit 02 is a Claude Code skill that turns taste into shipped sites. Kit 03 is a free cron that emails you a curated AI digest every morning. All yours.</p>
+      <p class="lede">Four live kits, no funnels, no upsell. Kit 01 is a teardown of a failed pipeline. Kit 02 turns taste into shipped sites. Kit 03 is a free cron that emails you a curated AI digest every morning. Kit 04 turns your weekly notes into a newsletter draft in your voice. All yours.</p>
     </header>
 
     <!-- Kit 01 -->
@@ -560,6 +560,90 @@
         <span>HN + RSS + GitHub</span>
         <span>Claude Haiku</span>
         <span>$0/mo on Vercel free</span>
+      </div>
+    </section>
+
+    <!-- Kit 04 -->
+    <section class="kit">
+      <div class="kit-head">
+        <span class="id">kit_04</span>
+        <span class="status">live</span>
+      </div>
+      <h2>Newsletter Writer Kit — your notes, your voice, shipped weekly</h2>
+      <p>A Monday cron that reads your notes from the past week and emails you a newsletter draft. Most "AI newsletter" tools generate from scratch and the result sounds like an LLM. <em>This one doesn't write — it assembles.</em> It quotes your actual sentences, picks the strongest theme of the week, and gets you to "edit" instead of "blank page."</p>
+
+      <div class="inside-label">what's in the kit</div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[01]</span>
+          <div>
+            <div class="piece-title">The voice rule</div>
+            <div class="piece-desc">The whole kit hinges on one prompt instruction.</div>
+          </div>
+        </div>
+        <p class="piece-detail">"You do NOT write FOR them. You ASSEMBLE what they already wrote. Quote from the notes liberally. Bridge with one sentence at most." That's the difference between a newsletter that sounds like you and a newsletter that sounds like ChatGPT did your homework. The model is reduced from author to editor — exactly the role it's actually good at.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[02]</span>
+          <div>
+            <div class="piece-title">A real voice profile, not a vibes prompt</div>
+            <div class="piece-desc">A voice.md file you author once with samples, rules, and a forbidden list.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Tone bullets, 2-3 paragraphs of your actual writing as live examples, hard-no rules ("no em dashes, no supercharge, no stay curious"), and an optional newsletter structure. Claude reads this every run. Most voice-matching tools rely on a one-line "write like X" prompt — this one gives the model real surface to mimic.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[03]</span>
+          <div>
+            <div class="piece-title">Reads from any markdown notes repo</div>
+            <div class="piece-desc">Obsidian Git, a private notes repo, anything that puts .md files in GitHub.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Uses the GitHub commits API to find files actually modified in the last 7 days — accurate mtimes, not folder scans. Read-only token, fine-grained scope. Works with any folder structure. The README has a one-time setup walkthrough for Obsidian users (install the Git plugin, point it at a private repo, done).</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[04]</span>
+          <div>
+            <div class="piece-title">Half-formed thoughts get marked, not invented</div>
+            <div class="piece-desc">Where you have a thought but didn't finish it, the draft leaves an HTML comment.</div>
+          </div>
+        </div>
+        <p class="piece-detail">The model is told: "Where the user clearly has a thought but didn't finish it, leave a &lt;!-- expand: ... --&gt; comment instead of inventing content." So you open the draft and see exactly which lines need your finger and which are already shippable. No guessing what's yours and what's hallucinated.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[05]</span>
+          <div>
+            <div class="piece-title">Email + .md attachment, edit in any editor</div>
+            <div class="piece-desc">No vendor lock-in. The draft is a markdown file you can edit anywhere.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Mondays at 8am ET, the cron sends you an email with the headline, the chosen theme, and the full draft attached as a markdown file. Open it in your editor, edit, paste into Beehiiv/Substack/wherever. Total cost on Sonnet 4.5: about a quarter a month at weekly cadence.</p>
+      </div>
+
+      <div class="cta-row">
+        <a href="https://github.com/caseymcdougal/newsletter-writer-kit" target="_blank" rel="noopener" class="btn btn-hot">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8 0 3.2a4.6 4.6 0 0 1 1.2 3.2c0 4.6-2.8 5.6-5.5 5.9.5.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/>
+          </svg>
+          grab the kit →
+        </a>
+        <span class="btn-note">public repo · MIT · deploy with one click</span>
+      </div>
+
+      <div class="meta">
+        <span>Next.js cron</span>
+        <span>GitHub notes repo</span>
+        <span>Claude Sonnet 4.5</span>
+        <span>~$0.25/mo</span>
       </div>
     </section>
 
