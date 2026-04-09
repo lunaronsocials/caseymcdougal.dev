@@ -317,7 +317,7 @@
     <header class="hero">
       <div class="eyebrow">the library · subscribers only</div>
       <h1>You're in. Here's <em>everything</em>.</h1>
-      <p class="lede">Two live kits, no funnels, no upsell. Kit 01 is a full teardown of a failed pipeline — workflows, prompts, pitches. Kit 02 is a private Claude Code skill that turns taste into shipped sites. Both yours.</p>
+      <p class="lede">Three live kits, no funnels, no upsell. Kit 01 is a teardown of a failed pipeline. Kit 02 is a Claude Code skill that turns taste into shipped sites. Kit 03 is a free cron that emails you a curated AI digest every morning. All yours.</p>
     </header>
 
     <!-- Kit 01 -->
@@ -476,6 +476,90 @@
         <span>glass + neuo</span>
         <span>anti-AI-tell filter</span>
         <span>built on taste-skill</span>
+      </div>
+    </section>
+
+    <!-- Kit 03 -->
+    <section class="kit">
+      <div class="kit-head">
+        <span class="id">kit_03</span>
+        <span class="status">live</span>
+      </div>
+      <h2>Daily AI Digest Kit — your own curated AI newsletter</h2>
+      <p>A cron that emails you a curated AI digest every morning. <em>$0/month</em>, deploys in five minutes, runs on Vercel's free tier. No n8n, no Zapier, no paid scrapers. Most "build an AI digest" tutorials route you through a $20/mo workflow tool. This is one Next.js file and a deploy button.</p>
+
+      <div class="inside-label">what's in the kit</div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[01]</span>
+          <div>
+            <div class="piece-title">Three sources, zero scraping fees</div>
+            <div class="piece-desc">Hacker News + GitHub trending + 15 RSS feeds, all free APIs.</div>
+          </div>
+        </div>
+        <p class="piece-detail">HN via Algolia, GitHub via the search API, RSS via rss-parser. No Apify, no Twitter API, no rented residential proxies. Anthropic, OpenAI, DeepMind, Mistral, Hugging Face, Latent Space, Simon Willison, Sebastian Raschka, Import AI, The Batch — already wired in. Add or remove feeds in one config file.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[02]</span>
+          <div>
+            <div class="piece-title">Interest-weighted ranking</div>
+            <div class="piece-desc">Tell it what you care about. Items mentioning those things get boosted.</div>
+          </div>
+        </div>
+        <p class="piece-detail">A regex/weight table you edit by hand: MCP gets +80, agents get +60, your specific framework gets whatever you decide. Then a Claude Haiku call reads your interest profile in plain English and writes the digest in a voice that sounds like a friend tipping you off — not an LLM summary blob.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[03]</span>
+          <div>
+            <div class="piece-title">An email that actually looks shipped</div>
+            <div class="piece-desc">Hand-written HTML template, not a Resend default.</div>
+          </div>
+        </div>
+        <p class="piece-detail">Headline pulled from the day's biggest story, source labels, hover-friendly link styles, dynamic date header, dark-mode safe. Sends through your own Gmail via an App Password — no domain verification, no Postmark account, no "from" address that screams "marketing tool."</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[04]</span>
+          <div>
+            <div class="piece-title">Failure alerts so it never silently dies</div>
+            <div class="piece-desc">If the cron crashes, you get an email about it.</div>
+          </div>
+        </div>
+        <p class="piece-detail">The annoying thing about morning crons isn't the build — it's discovering three weeks later that the digest stopped arriving and you didn't notice. This one wraps the whole route in a try/catch that emails you the error so you can fix it the same morning.</p>
+      </div>
+
+      <div class="piece">
+        <div class="piece-head">
+          <span class="piece-icon">[05]</span>
+          <div>
+            <div class="piece-title">One-click deploy</div>
+            <div class="piece-desc">Click the Vercel button, paste five env vars, done.</div>
+          </div>
+        </div>
+        <p class="piece-detail">The README walks you through every key — Anthropic API key, Gmail App Password, the cron secret. Total cost forever: pennies a month on Haiku. Total setup time: under five minutes if you already have a Vercel account.</p>
+      </div>
+
+      <div class="cta-row">
+        <a href="https://github.com/caseymcdougal/ai-digest-kit" target="_blank" rel="noopener" class="btn btn-hot">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8 0 3.2a4.6 4.6 0 0 1 1.2 3.2c0 4.6-2.8 5.6-5.5 5.9.5.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/>
+          </svg>
+          grab the kit →
+        </a>
+        <span class="btn-note">public repo · MIT · deploy with one click</span>
+      </div>
+
+      <div class="meta">
+        <span>Next.js cron</span>
+        <span>HN + RSS + GitHub</span>
+        <span>Claude Haiku</span>
+        <span>$0/mo on Vercel free</span>
       </div>
     </section>
 
