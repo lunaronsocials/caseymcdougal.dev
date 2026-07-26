@@ -365,12 +365,17 @@
   transform-style: preserve-3d;
   transition: transform 700ms var(--cm-card-ease),
     box-shadow 250ms var(--cm-card-ease);
-  will-change: transform;
 }
 /* while the pointer drives the tilt, track it tightly;
    the long 700ms ease is for settling back to rest */
 .cm-glass-card-wrap.is-active .cm-glass-card {
   transition-duration: 120ms, 250ms;
+}
+/* promote to a layer only while the pointer can drive the
+   tilt; will-change left on at rest costs memory for nothing */
+.cm-glass-card-wrap:hover .cm-glass-card,
+.cm-glass-card-wrap.is-active .cm-glass-card {
+  will-change: transform;
 }
 .cm-glass-card:hover {
   box-shadow:
