@@ -163,235 +163,8 @@
 
     /* the shader button ships its own styles; the stage just sets its text color */
     .demo-stage .lgb { --lgb-text: oklch(0.98 0.01 85); }
-
-    .cm-glass-toggle {
-      --cm-toggle-text: oklch(0.98 0.01 85);
-      --cm-toggle-accent: oklch(0.55 0.14 40);
-      --cm-toggle-w: 64px;
-      --cm-toggle-h: 36px;
-      --cm-toggle-ease: cubic-bezier(0.3, 0.7, 0.4, 1.3);
-      position: relative;
-      width: var(--cm-toggle-w);
-      height: var(--cm-toggle-h);
-      flex: none;
-      padding: 0;
-      appearance: none;
-      cursor: pointer;
-      border: 1px solid color-mix(in oklch, var(--cm-toggle-text) 30%, transparent);
-      border-radius: 999px;
-      background: linear-gradient(180deg, color-mix(in oklch, black 30%, transparent), color-mix(in oklch, var(--cm-toggle-text) 6%, transparent)), oklch(0.2 0.015 60 / 0.6);
-      box-shadow: inset 0 2px 6px color-mix(in oklch, black 40%, transparent), inset 0 -1px 0 color-mix(in oklch, var(--cm-toggle-text) 18%, transparent), 0 10px 24px oklch(0.08 0.01 60 / 0.4);
-      backdrop-filter: blur(12px) saturate(1.2);
-      -webkit-backdrop-filter: blur(12px) saturate(1.2);
-      transition: background 180ms ease, border-color 180ms ease, box-shadow 220ms ease;
-    }
-    .cm-glass-toggle::after {
-      content: '';
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: calc(var(--cm-toggle-h) - 8px);
-      height: calc(var(--cm-toggle-h) - 8px);
-      border-radius: 50%;
-      background: linear-gradient(180deg, #ffffff, #cfd3d8 78%, #b9bec5);
-      box-shadow: inset 0 1px 0 #fff, inset 0 -2px 3px rgba(0,0,0,0.22), 0 3px 8px rgba(0,0,0,0.45);
-      transition: transform 320ms var(--cm-toggle-ease), width 320ms var(--cm-toggle-ease);
-    }
-    .cm-glass-toggle[aria-checked="true"] {
-      border-color: color-mix(in oklch, var(--cm-toggle-accent) 70%, white);
-      background: linear-gradient(180deg, color-mix(in oklch, black 16%, transparent), color-mix(in oklch, var(--cm-toggle-text) 8%, transparent)), color-mix(in oklch, var(--cm-toggle-accent) 72%, oklch(0.2 0.015 60));
-      box-shadow: inset 0 2px 6px color-mix(in oklch, black 34%, transparent), inset 0 -1px 0 color-mix(in oklch, var(--cm-toggle-text) 18%, transparent), 0 10px 24px oklch(0.08 0.01 60 / 0.4), 0 0 18px color-mix(in oklch, var(--cm-toggle-accent) 45%, transparent);
-    }
-    .cm-glass-toggle[aria-checked="true"]::after { transform: translateX(calc(var(--cm-toggle-w) - var(--cm-toggle-h) + 2px)); }
-    .cm-glass-toggle:active::after { width: calc(var(--cm-toggle-h) - 2px); }
-    /* pressed while checked: pin the thumb's right edge so the stretch grows inward instead of spilling past the track */
-    .cm-glass-toggle[aria-checked="true"]:active::after { transform: translateX(calc(var(--cm-toggle-w) - var(--cm-toggle-h) - 4px)); }
-    .cm-glass-toggle:focus-visible { outline: 2px solid var(--cm-toggle-text); outline-offset: 4px; }
-    .cm-glass-toggle-row { display: flex; align-items: center; gap: 14px; color: oklch(0.98 0.01 85); font: 550 14px/1.2 system-ui, sans-serif; }
-    .cm-glass-toggle-row span { cursor: pointer; user-select: none; }
-
-    .cm-glass-field {
-      --cm-field-text: oklch(0.98 0.01 85);
-      --cm-field-muted: color-mix(in oklch, var(--cm-field-text) 55%, transparent);
-      --cm-field-accent: oklch(0.74 0.11 45);
-      --cm-field-danger: oklch(0.78 0.13 40);
-      display: grid;
-      gap: 8px;
-      width: min(100%, 300px);
-      color: var(--cm-field-text);
-    }
-    .cm-glass-field__label { font: 500 11px/1.3 ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cm-field-muted); transition: color 200ms ease; }
-    /* label lights up while the field is focused */
-    .cm-glass-field:focus-within .cm-glass-field__label { color: var(--cm-field-accent); }
-    .cm-glass-field:focus-within:has(.cm-glass-input[aria-invalid="true"]) .cm-glass-field__label { color: var(--cm-field-danger); }
-    .cm-glass-input {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid color-mix(in oklch, var(--cm-field-text) 26%, transparent);
-      border-radius: 14px;
-      background: linear-gradient(180deg, color-mix(in oklch, black 26%, transparent), color-mix(in oklch, black 8%, transparent) 55%), oklch(0.2 0.015 60 / 0.55);
-      color: var(--cm-field-text);
-      font: 400 15px/1.4 system-ui, sans-serif;
-      box-shadow: inset 0 2px 6px color-mix(in oklch, black 38%, transparent), inset 0 -1px 0 color-mix(in oklch, var(--cm-field-text) 16%, transparent);
-      backdrop-filter: blur(12px) saturate(1.2);
-      -webkit-backdrop-filter: blur(12px) saturate(1.2);
-      transition: border-color 200ms ease, box-shadow 200ms ease;
-    }
-    .cm-glass-input::placeholder { color: var(--cm-field-muted); }
-    /* a filled field earns a slightly brighter edge, so idle-empty and idle-full read differently */
-    .cm-glass-input:not(:placeholder-shown) { border-color: color-mix(in oklch, var(--cm-field-text) 40%, transparent); }
-    .cm-glass-input:focus {
-      outline: 0;
-      border-color: color-mix(in oklch, var(--cm-field-text) 62%, transparent);
-      box-shadow: inset 0 2px 6px color-mix(in oklch, black 38%, transparent), 0 0 0 3px color-mix(in oklch, var(--cm-field-text) 18%, transparent);
-    }
-    .cm-glass-input[aria-invalid="true"] {
-      border-color: var(--cm-field-danger);
-      box-shadow: inset 0 2px 6px color-mix(in oklch, black 38%, transparent), 0 0 0 3px color-mix(in oklch, var(--cm-field-danger) 24%, transparent);
-    }
-    .cm-glass-field__error { display: none; margin: 0; color: var(--cm-field-danger); font-size: 13px; }
-    .cm-glass-input[aria-invalid="true"] ~ .cm-glass-field__error { display: block; animation: cm-field-error-in 260ms cubic-bezier(0.22, 1, 0.36, 1); }
-    @keyframes cm-field-error-in { from { opacity: 0; transform: translateY(-4px); } }
-
-    .cm-glass-dialog {
-      --cm-dialog-text: oklch(0.98 0.01 85);
-      --cm-dialog-muted: color-mix(in oklch, var(--cm-dialog-text) 62%, transparent);
-      --cm-dialog-accent: oklch(0.55 0.14 40);
-      width: min(92vw, 410px);
-      padding: 0;
-      border: 0;
-      border-radius: 22px;
-      color: var(--cm-dialog-text);
-      background: radial-gradient(120% 90% at 18% 0%, color-mix(in oklch, var(--cm-dialog-text) 20%, transparent), transparent 55%), linear-gradient(165deg, color-mix(in oklch, var(--cm-dialog-text) 14%, transparent), color-mix(in oklch, var(--cm-dialog-text) 5%, transparent)), oklch(0.22 0.015 60 / 0.82);
-      box-shadow: inset 0 1px 0 color-mix(in oklch, var(--cm-dialog-text) 42%, transparent), inset 0 -14px 30px color-mix(in oklch, black 22%, transparent), 0 34px 90px oklch(0.08 0.01 60 / 0.65), 0 0 70px color-mix(in oklch, var(--cm-dialog-accent) 16%, transparent);
-      backdrop-filter: blur(18px) saturate(1.25);
-      -webkit-backdrop-filter: blur(18px) saturate(1.25);
-    }
-    /* bezel ring: masked 1.5px band with its own backdrop-filter, so the edge
-       samples and brightens whatever sits behind the dialog (same trick as the
-       liquid button's orb ring) */
-    .cm-glass-dialog::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1.5px;
-      pointer-events: none;
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      mask-composite: exclude;
-      background: linear-gradient(165deg, color-mix(in oklch, var(--cm-dialog-text) 85%, transparent), color-mix(in oklch, var(--cm-dialog-text) 22%, transparent) 45%, color-mix(in oklch, var(--cm-dialog-text) 55%, transparent));
-      -webkit-backdrop-filter: blur(4px) brightness(1.5) saturate(1.3);
-      backdrop-filter: blur(4px) brightness(1.5) saturate(1.3);
-    }
-    /* specular sheen across the top edge */
-    .cm-glass-dialog::after {
-      content: '';
-      position: absolute;
-      inset: 0 0 60%;
-      border-radius: 22px 22px 0 0;
-      pointer-events: none;
-      background: radial-gradient(140% 100% at 50% -30%, color-mix(in oklch, var(--cm-dialog-text) 26%, transparent), transparent 62%);
-    }
-    .cm-glass-dialog::backdrop { background: oklch(0.1 0.01 60 / 0.5); -webkit-backdrop-filter: blur(8px) saturate(0.9); backdrop-filter: blur(8px) saturate(0.9); }
-    .cm-glass-dialog[open] { animation: cm-dialog-in 460ms cubic-bezier(0.26, 1.2, 0.4, 1); }
-    .cm-glass-dialog[open]::backdrop { animation: cm-dialog-fade 460ms ease; }
-    .cm-glass-dialog[open] :is(.cm-glass-dialog__title, .cm-glass-dialog__copy, .cm-glass-dialog__actions) { animation: cm-dialog-rise 520ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
-    .cm-glass-dialog[open] .cm-glass-dialog__copy { animation-delay: 60ms; }
-    .cm-glass-dialog[open] .cm-glass-dialog__actions { animation-delay: 110ms; }
-    @keyframes cm-dialog-in { from { opacity: 0; transform: translateY(22px) scale(0.92); filter: blur(8px); } }
-    @keyframes cm-dialog-rise { from { opacity: 0; transform: translateY(10px); } }
-    @keyframes cm-dialog-fade { from { opacity: 0; } }
-    .cm-glass-dialog__body { padding: 28px; }
-    .cm-glass-dialog__title { margin: 0; font: 600 24px/1.15 Georgia, serif; }
-    .cm-glass-dialog__copy { margin: 10px 0 0; color: var(--cm-dialog-muted); font: 400 15px/1.55 system-ui, sans-serif; }
-    .cm-glass-dialog__actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
-    .cm-glass-dialog__button {
-      padding: 10px 16px;
-      border: 1px solid color-mix(in oklch, var(--cm-dialog-text) 30%, transparent);
-      border-radius: 12px;
-      background: color-mix(in oklch, var(--cm-dialog-text) 10%, transparent);
-      color: var(--cm-dialog-text);
-      font: 600 14px/1.2 system-ui, sans-serif;
-      transition: background 160ms ease, border-color 160ms ease;
-    }
-    .cm-glass-dialog__button:hover { background: color-mix(in oklch, var(--cm-dialog-text) 20%, transparent); }
-    .cm-glass-dialog__button--primary { border-color: transparent; background: var(--cm-dialog-text); color: oklch(0.24 0.015 60); }
-    .cm-glass-dialog__button--primary:hover { background: color-mix(in oklch, var(--cm-dialog-text) 86%, black); }
-    .cm-glass-dialog__button:focus-visible { outline: 2px solid var(--cm-dialog-text); outline-offset: 3px; }
-    body:has(.cm-glass-dialog[open]) { overflow: hidden; }
-
-    .cm-frost-nav {
-      --cm-nav-text: oklch(0.98 0.01 85);
-      --cm-nav-muted: color-mix(in oklch, var(--cm-nav-text) 64%, transparent);
-      --cm-nav-tint: oklch(0.2 0.015 60 / 0.64);
-      --cm-nav-ease: cubic-bezier(0.22, 1, 0.36, 1);
-      position: sticky;
-      top: 16px;
-      width: min(100%, 720px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 10px 10px 10px 18px;
-      border: 1px solid color-mix(in oklch, var(--cm-nav-text) 30%, transparent);
-      border-radius: 16px;
-      color: var(--cm-nav-text);
-      background: linear-gradient(color-mix(in oklch, var(--cm-nav-text) 12%, transparent), color-mix(in oklch, var(--cm-nav-text) 12%, transparent)), var(--cm-nav-tint);
-      box-shadow: inset 0 1px 0 color-mix(in oklch, var(--cm-nav-text) 38%, transparent), 0 16px 36px oklch(0.08 0.01 60 / 0.46);
-      backdrop-filter: blur(18px) saturate(1.3);
-      -webkit-backdrop-filter: blur(18px) saturate(1.3);
-    }
-    .cm-frost-nav__brand { color: inherit; font: 700 16px/1.2 system-ui, sans-serif; }
-    .cm-frost-nav__links { position: relative; display: flex; align-items: center; padding: 2px; border-radius: 11px; background: color-mix(in oklch, black 12%, transparent); }
-    .cm-frost-nav__pill { position: absolute; inset-block: 2px; left: 0; width: var(--cm-pill-width, 0); border: 1px solid color-mix(in oklch, var(--cm-nav-text) 22%, transparent); border-radius: 9px; background: color-mix(in oklch, var(--cm-nav-text) 15%, transparent); box-shadow: inset 0 1px 0 color-mix(in oklch, var(--cm-nav-text) 24%, transparent); transform: translateX(var(--cm-pill-x, 0)); transition: width 250ms var(--cm-nav-ease), transform 250ms var(--cm-nav-ease); }
-    .cm-frost-nav__links a { position: relative; z-index: 1; padding: 8px 12px; border-radius: 9px; color: var(--cm-nav-muted); font: 550 13px/1.2 system-ui, sans-serif; text-decoration: none; transition: color 150ms ease; }
-    .cm-frost-nav__links a:hover, .cm-frost-nav__links a:focus-visible, .cm-frost-nav__links a[aria-current="page"] { color: var(--cm-nav-text); }
-    .cm-frost-nav__links a:focus-visible { outline: 2px solid var(--cm-nav-text); outline-offset: -2px; }
-
-    .cm-glass-card-wrap {
-      --cm-tilt-x: 0deg;
-      --cm-tilt-y: 0deg;
-      --cm-glare-x: 50%;
-      --cm-glare-y: 50%;
-      width: min(100%, 340px);
-      perspective: 1000px;
-      touch-action: pan-y;
-    }
-    .cm-glass-card {
-      --cm-card-text: oklch(0.98 0.01 85);
-      --cm-card-muted: color-mix(in oklch, var(--cm-card-text) 68%, transparent);
-      --cm-card-tint: oklch(0.2 0.015 60 / 0.58);
-      --cm-card-ease: cubic-bezier(0.22, 1, 0.36, 1);
-      position: relative;
-      display: block;
-      overflow: hidden;
-      padding: 28px;
-      border: 1px solid color-mix(in oklch, var(--cm-card-text) 28%, transparent);
-      border-radius: 18px;
-      color: var(--cm-card-text);
-      background: linear-gradient(145deg, color-mix(in oklch, var(--cm-card-text) 21%, transparent), color-mix(in oklch, var(--cm-card-text) 7%, transparent)), var(--cm-card-tint);
-      box-shadow: inset 0 1px 0 color-mix(in oklch, var(--cm-card-text) 40%, transparent), 0 18px 40px oklch(0.08 0.01 60 / 0.5);
-      backdrop-filter: blur(18px) saturate(1.2);
-      -webkit-backdrop-filter: blur(18px) saturate(1.2);
-      text-decoration: none;
-      transform: rotateX(var(--cm-tilt-x)) rotateY(var(--cm-tilt-y));
-      transform-style: preserve-3d;
-      transition: transform 700ms var(--cm-card-ease), box-shadow 250ms var(--cm-card-ease);
-      will-change: transform;
-    }
-    .cm-glass-card-wrap.is-active .cm-glass-card { transition-duration: 120ms, 250ms; }
-    .cm-glass-card:hover { box-shadow: inset 0 1px 0 color-mix(in oklch, var(--cm-card-text) 52%, transparent), 0 28px 54px oklch(0.08 0.01 60 / 0.58); }
-    .cm-glass-card:active { scale: 0.985; }
-    .cm-glass-card:focus-visible { outline: 2px solid var(--cm-card-text); outline-offset: 5px; }
-    .cm-glass-card__glare { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(circle at var(--cm-glare-x) var(--cm-glare-y), color-mix(in oklch, var(--cm-card-text) 34%, transparent), transparent 44%); mix-blend-mode: screen; transition: opacity 300ms ease; }
-    .cm-glass-card-wrap.is-active .cm-glass-card__glare { opacity: 0.72; }
-    .cm-glass-card__meta, .cm-glass-card__title, .cm-glass-card__arrow { position: relative; z-index: 1; transform: translateZ(22px); }
-    .cm-glass-card__meta { display: block; margin-bottom: 56px; color: var(--cm-card-muted); font: 500 11px/1.3 ui-monospace, monospace; letter-spacing: 0.08em; text-transform: uppercase; }
-    .cm-glass-card__title { display: block; max-width: 12ch; font: 600 28px/1.08 Georgia, serif; }
-    .cm-glass-card__arrow { display: block; width: max-content; margin-top: 20px; color: var(--cm-card-muted); font: 500 13px/1.2 system-ui, sans-serif; transition: color 150ms ease, transform 350ms var(--cm-card-ease); }
-    .cm-glass-card:hover .cm-glass-card__arrow { color: var(--cm-card-text); transform: translate3d(3px, 0, 22px); }
+    /* stage-only sizing; the component itself doesn't fix a width */
+    .demo-stage .cm-frost-nav { width: min(100%, 720px); }
 
     .source-area { margin-top: var(--gap-lg); }
     .source-title { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
@@ -433,10 +206,6 @@
     .btn:hover { background: color-mix(in oklch, var(--accent) 88%, var(--fg)); }
     .pagefoot { padding-block: 40px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
 
-    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-      .cm-frost-nav, .cm-glass-card, .cm-glass-toggle, .cm-glass-input, .cm-glass-dialog { background: color-mix(in oklch, var(--surface) 22%, var(--fg)); }
-    }
-
     @media (max-width: 820px) {
       .component-head { grid-template-columns: 54px 1fr; }
       .usage-note { grid-column: 2; }
@@ -450,19 +219,610 @@
       .component-number { padding-top: 0; }
       .usage-note { grid-column: 1; margin-top: 12px; }
       .demo-stage { min-height: 340px; padding: 32px 18px; }
-      .cm-frost-nav { gap: 14px; padding-left: 14px; }
-      .cm-frost-nav__links a:last-child { display: none; }
+      .demo-stage .cm-frost-nav { gap: 14px; padding-left: 14px; }
       .pagefoot .row-between { align-items: flex-start; flex-direction: column; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
-      .cm-glass-card, .cm-glass-card:hover { transform: none; }
-      .cm-glass-card__glare { display: none; }
-      .cm-glass-toggle::after { transition: none; }
-      .cm-glass-field__error { animation: none; }
-      .cm-glass-dialog[open], .cm-glass-dialog[open]::backdrop, .cm-glass-dialog[open] :is(.cm-glass-dialog__title, .cm-glass-dialog__copy, .cm-glass-dialog__actions) { animation: none; }
     }
+  </style>
+
+  <!-- Component styles. Each block below IS the live stylesheet for its demo
+       AND the exact text shown in its "Copy the Source" panel (a loader at
+       the end of <body> mirrors textContent into the panels), so the copy
+       can never drift from what the page runs. -->
+
+  <style data-code="nav-css">
+.cm-frost-nav {
+  --cm-nav-text: oklch(0.98 0.01 85);
+  --cm-nav-muted: color-mix(in oklch,
+    var(--cm-nav-text) 64%, transparent);
+  --cm-nav-tint: oklch(0.2 0.015 60 / 0.64);
+  --cm-nav-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: sticky;
+  top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 10px 10px 10px 18px;
+  border: 1px solid color-mix(in oklch,
+    var(--cm-nav-text) 30%, transparent);
+  border-radius: 16px;
+  color: var(--cm-nav-text);
+  background: linear-gradient(
+    color-mix(in oklch, var(--cm-nav-text) 12%, transparent),
+    color-mix(in oklch, var(--cm-nav-text) 12%, transparent)),
+    var(--cm-nav-tint);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch,
+      var(--cm-nav-text) 38%, transparent),
+    0 16px 36px oklch(0.08 0.01 60 / 0.46);
+  backdrop-filter: blur(18px) saturate(1.3);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+}
+.cm-frost-nav__brand {
+  color: inherit;
+  font: 700 16px/1.2 system-ui, sans-serif;
+  text-decoration: none;
+}
+.cm-frost-nav__links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 11px;
+  background: color-mix(in oklch, black 12%, transparent);
+}
+.cm-frost-nav__pill {
+  position: absolute;
+  inset-block: 2px;
+  left: 0;
+  width: var(--cm-pill-width, 0);
+  border: 1px solid color-mix(in oklch,
+    var(--cm-nav-text) 22%, transparent);
+  border-radius: 9px;
+  background: color-mix(in oklch,
+    var(--cm-nav-text) 15%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in oklch,
+    var(--cm-nav-text) 24%, transparent);
+  transform: translateX(var(--cm-pill-x, 0));
+  transition: width 250ms var(--cm-nav-ease),
+    transform 250ms var(--cm-nav-ease);
+}
+.cm-frost-nav__links a {
+  position: relative;
+  z-index: 1;
+  padding: 8px 12px;
+  border-radius: 9px;
+  color: var(--cm-nav-muted);
+  font: 550 13px/1.2 system-ui, sans-serif;
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.cm-frost-nav__links a:hover,
+.cm-frost-nav__links a:focus-visible,
+.cm-frost-nav__links a[aria-current="page"] {
+  color: var(--cm-nav-text);
+}
+.cm-frost-nav__links a:focus-visible {
+  outline: 2px solid var(--cm-nav-text);
+  outline-offset: -2px;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))) {
+  .cm-frost-nav { background: oklch(0.22 0.01 60); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-frost-nav__pill,
+  .cm-frost-nav__links a { transition: none; }
+}
+
+@media (max-width: 520px) {
+  .cm-frost-nav__links a:last-child { display: none; }
+}
+  </style>
+
+  <style data-code="card-css">
+.cm-glass-card-wrap {
+  --cm-tilt-x: 0deg;
+  --cm-tilt-y: 0deg;
+  --cm-glare-x: 50%;
+  --cm-glare-y: 50%;
+  width: min(100%, 340px);
+  perspective: 1000px;
+  touch-action: pan-y;
+}
+.cm-glass-card {
+  --cm-card-text: oklch(0.98 0.01 85);
+  --cm-card-muted: color-mix(in oklch,
+    var(--cm-card-text) 68%, transparent);
+  --cm-card-tint: oklch(0.2 0.015 60 / 0.58);
+  --cm-card-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 28px;
+  border: 1px solid color-mix(in oklch,
+    var(--cm-card-text) 28%, transparent);
+  border-radius: 18px;
+  color: var(--cm-card-text);
+  background: linear-gradient(145deg,
+    color-mix(in oklch, var(--cm-card-text) 21%, transparent),
+    color-mix(in oklch, var(--cm-card-text) 7%, transparent)),
+    var(--cm-card-tint);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch,
+      var(--cm-card-text) 40%, transparent),
+    0 18px 40px oklch(0.08 0.01 60 / 0.5);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  text-decoration: none;
+  transform: rotateX(var(--cm-tilt-x)) rotateY(var(--cm-tilt-y));
+  transform-style: preserve-3d;
+  transition: transform 700ms var(--cm-card-ease),
+    box-shadow 250ms var(--cm-card-ease);
+  will-change: transform;
+}
+/* while the pointer drives the tilt, track it tightly;
+   the long 700ms ease is for settling back to rest */
+.cm-glass-card-wrap.is-active .cm-glass-card {
+  transition-duration: 120ms, 250ms;
+}
+.cm-glass-card:hover {
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch,
+      var(--cm-card-text) 52%, transparent),
+    0 28px 54px oklch(0.08 0.01 60 / 0.58);
+}
+.cm-glass-card:active { scale: 0.985; }
+.cm-glass-card:focus-visible {
+  outline: 2px solid var(--cm-card-text);
+  outline-offset: 5px;
+}
+.cm-glass-card__glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at
+    var(--cm-glare-x) var(--cm-glare-y),
+    color-mix(in oklch, var(--cm-card-text) 34%, transparent),
+    transparent 44%);
+  mix-blend-mode: screen;
+  transition: opacity 300ms ease;
+}
+.cm-glass-card-wrap.is-active .cm-glass-card__glare { opacity: 0.72; }
+.cm-glass-card__meta,
+.cm-glass-card__title,
+.cm-glass-card__arrow {
+  position: relative;
+  z-index: 1;
+  transform: translateZ(22px);
+}
+.cm-glass-card__meta {
+  display: block;
+  margin-bottom: 56px;
+  color: var(--cm-card-muted);
+  font: 500 11px/1.3 ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cm-glass-card__title {
+  display: block;
+  max-width: 12ch;
+  font: 600 28px/1.08 Georgia, serif;
+}
+.cm-glass-card__arrow {
+  display: block;
+  width: max-content;
+  margin-top: 20px;
+  color: var(--cm-card-muted);
+  font: 500 13px/1.2 system-ui, sans-serif;
+  transition: color 150ms ease, transform 350ms var(--cm-card-ease);
+}
+.cm-glass-card:hover .cm-glass-card__arrow {
+  color: var(--cm-card-text);
+  transform: translate3d(3px, 0, 22px);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))) {
+  .cm-glass-card { background: oklch(0.24 0.015 60); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-glass-card { transition: none; }
+  .cm-glass-card,
+  .cm-glass-card:hover { transform: none; }
+  .cm-glass-card__glare { display: none; }
+}
+  </style>
+
+  <style data-code="toggle-css">
+.cm-glass-toggle {
+  --cm-toggle-text: oklch(0.98 0.01 85);
+  --cm-toggle-accent: oklch(0.55 0.14 40);
+  --cm-toggle-w: 64px;
+  --cm-toggle-h: 36px;
+  /* overshoot easing = the spring */
+  --cm-toggle-ease: cubic-bezier(0.3, 0.7, 0.4, 1.3);
+  position: relative;
+  width: var(--cm-toggle-w);
+  height: var(--cm-toggle-h);
+  flex: none;
+  padding: 0;
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid color-mix(in oklch,
+    var(--cm-toggle-text) 30%, transparent);
+  border-radius: 999px;
+  background: linear-gradient(180deg,
+    color-mix(in oklch, black 30%, transparent),
+    color-mix(in oklch, var(--cm-toggle-text) 6%, transparent)),
+    oklch(0.2 0.015 60 / 0.6);
+  box-shadow:
+    inset 0 2px 6px color-mix(in oklch, black 40%, transparent),
+    inset 0 -1px 0 color-mix(in oklch,
+      var(--cm-toggle-text) 18%, transparent),
+    0 10px 24px oklch(0.08 0.01 60 / 0.4);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  transition: background 180ms ease, border-color 180ms ease,
+    box-shadow 220ms ease;
+}
+.cm-glass-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: calc(var(--cm-toggle-h) - 8px);
+  height: calc(var(--cm-toggle-h) - 8px);
+  border-radius: 50%;
+  background: linear-gradient(180deg,
+    #ffffff, #cfd3d8 78%, #b9bec5);
+  box-shadow: inset 0 1px 0 #fff,
+    inset 0 -2px 3px rgba(0,0,0,0.22),
+    0 3px 8px rgba(0,0,0,0.45);
+  transition: transform 320ms var(--cm-toggle-ease),
+    width 320ms var(--cm-toggle-ease);
+}
+.cm-glass-toggle[aria-checked="true"] {
+  border-color: color-mix(in oklch,
+    var(--cm-toggle-accent) 70%, white);
+  background: linear-gradient(180deg,
+    color-mix(in oklch, black 16%, transparent),
+    color-mix(in oklch, var(--cm-toggle-text) 8%, transparent)),
+    color-mix(in oklch, var(--cm-toggle-accent) 72%,
+      oklch(0.2 0.015 60));
+  /* accent glow energizes the "on" state */
+  box-shadow:
+    inset 0 2px 6px color-mix(in oklch, black 34%, transparent),
+    inset 0 -1px 0 color-mix(in oklch,
+      var(--cm-toggle-text) 18%, transparent),
+    0 10px 24px oklch(0.08 0.01 60 / 0.4),
+    0 0 18px color-mix(in oklch,
+      var(--cm-toggle-accent) 45%, transparent);
+}
+.cm-glass-toggle[aria-checked="true"]::after {
+  transform: translateX(
+    calc(var(--cm-toggle-w) - var(--cm-toggle-h) + 2px));
+}
+/* press squash: thumb stretches toward the direction
+   of travel while held, same spring as the slide */
+.cm-glass-toggle:active::after {
+  width: calc(var(--cm-toggle-h) - 2px);
+}
+/* pressed while checked: pin the right edge so the
+   stretch grows inward, not past the track */
+.cm-glass-toggle[aria-checked="true"]:active::after {
+  transform: translateX(
+    calc(var(--cm-toggle-w) - var(--cm-toggle-h) - 4px));
+}
+.cm-glass-toggle:focus-visible {
+  outline: 2px solid var(--cm-toggle-text);
+  outline-offset: 4px;
+}
+.cm-glass-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: oklch(0.98 0.01 85);
+  font: 550 14px/1.2 system-ui, sans-serif;
+}
+.cm-glass-toggle-row span { cursor: pointer; user-select: none; }
+
+@supports not ((backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))) {
+  .cm-glass-toggle { background: oklch(0.24 0.015 60); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-glass-toggle::after { transition: none; }
+}
+  </style>
+
+  <style data-code="input-css">
+.cm-glass-field {
+  --cm-field-text: oklch(0.98 0.01 85);
+  --cm-field-muted: color-mix(in oklch,
+    var(--cm-field-text) 55%, transparent);
+  --cm-field-accent: oklch(0.74 0.11 45);
+  --cm-field-danger: oklch(0.78 0.13 40);
+  display: grid;
+  gap: 8px;
+  width: min(100%, 300px);
+  color: var(--cm-field-text);
+}
+.cm-glass-field__label {
+  font: 500 11px/1.3 ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cm-field-muted);
+  transition: color 200ms ease;
+}
+/* label lights up while the field is focused */
+.cm-glass-field:focus-within .cm-glass-field__label {
+  color: var(--cm-field-accent);
+}
+.cm-glass-field:focus-within:has(
+  .cm-glass-input[aria-invalid="true"]) .cm-glass-field__label {
+  color: var(--cm-field-danger);
+}
+.cm-glass-input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid color-mix(in oklch,
+    var(--cm-field-text) 26%, transparent);
+  border-radius: 14px;
+  background: linear-gradient(180deg,
+    color-mix(in oklch, black 26%, transparent),
+    color-mix(in oklch, black 8%, transparent) 55%),
+    oklch(0.2 0.015 60 / 0.55);
+  color: var(--cm-field-text);
+  font: 400 15px/1.4 system-ui, sans-serif;
+  box-shadow:
+    inset 0 2px 6px color-mix(in oklch, black 38%, transparent),
+    inset 0 -1px 0 color-mix(in oklch,
+      var(--cm-field-text) 16%, transparent);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.cm-glass-input::placeholder { color: var(--cm-field-muted); }
+/* a filled field earns a slightly brighter edge */
+.cm-glass-input:not(:placeholder-shown) {
+  border-color: color-mix(in oklch,
+    var(--cm-field-text) 40%, transparent);
+}
+.cm-glass-input:focus {
+  outline: 0;
+  border-color: color-mix(in oklch,
+    var(--cm-field-text) 62%, transparent);
+  box-shadow:
+    inset 0 2px 6px color-mix(in oklch, black 38%, transparent),
+    0 0 0 3px color-mix(in oklch,
+      var(--cm-field-text) 18%, transparent);
+}
+.cm-glass-input[aria-invalid="true"] {
+  border-color: var(--cm-field-danger);
+  box-shadow:
+    inset 0 2px 6px color-mix(in oklch, black 38%, transparent),
+    0 0 0 3px color-mix(in oklch,
+      var(--cm-field-danger) 24%, transparent);
+}
+.cm-glass-field__error {
+  display: none;
+  margin: 0;
+  color: var(--cm-field-danger);
+  font-size: 13px;
+}
+.cm-glass-input[aria-invalid="true"] ~ .cm-glass-field__error {
+  display: block;
+  animation: cm-field-error-in 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes cm-field-error-in {
+  from { opacity: 0; transform: translateY(-4px); }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))) {
+  .cm-glass-input { background: oklch(0.24 0.015 60); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-glass-field__error { animation: none; }
+}
+  </style>
+
+  <style data-code="dialog-css">
+.cm-glass-dialog {
+  --cm-dialog-text: oklch(0.98 0.01 85);
+  --cm-dialog-muted: color-mix(in oklch,
+    var(--cm-dialog-text) 62%, transparent);
+  --cm-dialog-accent: oklch(0.55 0.14 40);
+  width: min(92vw, 410px);
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  color: var(--cm-dialog-text);
+  background:
+    radial-gradient(120% 90% at 18% 0%,
+      color-mix(in oklch, var(--cm-dialog-text) 20%, transparent),
+      transparent 55%),
+    linear-gradient(165deg,
+      color-mix(in oklch, var(--cm-dialog-text) 14%, transparent),
+      color-mix(in oklch, var(--cm-dialog-text) 5%, transparent)),
+    oklch(0.22 0.015 60 / 0.82);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch,
+      var(--cm-dialog-text) 42%, transparent),
+    inset 0 -14px 30px color-mix(in oklch,
+      black 22%, transparent),
+    0 34px 90px oklch(0.08 0.01 60 / 0.65),
+    0 0 70px color-mix(in oklch,
+      var(--cm-dialog-accent) 16%, transparent);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  /* the closed state doubles as the exit-animation target:
+     display + overlay transition with allow-discrete keeps the
+     panel visible while it fades out, instead of a hard cut */
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  filter: blur(6px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease,
+    filter 200ms ease,
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+.cm-glass-dialog[open] {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  /* the entrance rides the same transition, longer and springier */
+  transition-duration: 460ms;
+  transition-timing-function: cubic-bezier(0.26, 1.2, 0.4, 1);
+}
+/* where the entrance starts on the frame [open] lands */
+@starting-style {
+  .cm-glass-dialog[open] {
+    opacity: 0;
+    transform: translateY(22px) scale(0.92);
+    filter: blur(8px);
+  }
+}
+/* bezel ring: masked 1.5px band with its own
+   backdrop-filter, so the edge samples and brightens
+   whatever sits behind the dialog */
+.cm-glass-dialog::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  background: linear-gradient(165deg,
+    color-mix(in oklch, var(--cm-dialog-text) 85%, transparent),
+    color-mix(in oklch,
+      var(--cm-dialog-text) 22%, transparent) 45%,
+    color-mix(in oklch, var(--cm-dialog-text) 55%, transparent));
+  -webkit-backdrop-filter: blur(4px) brightness(1.5)
+    saturate(1.3);
+  backdrop-filter: blur(4px) brightness(1.5) saturate(1.3);
+}
+/* specular sheen across the top edge */
+.cm-glass-dialog::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 60%;
+  border-radius: 22px 22px 0 0;
+  pointer-events: none;
+  background: radial-gradient(140% 100% at 50% -30%,
+    color-mix(in oklch, var(--cm-dialog-text) 26%, transparent),
+    transparent 62%);
+}
+.cm-glass-dialog::backdrop {
+  background: oklch(0.1 0.01 60 / 0.5);
+  -webkit-backdrop-filter: blur(8px) saturate(0.9);
+  backdrop-filter: blur(8px) saturate(0.9);
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+.cm-glass-dialog[open]::backdrop {
+  opacity: 1;
+  transition-duration: 460ms;
+}
+@starting-style {
+  .cm-glass-dialog[open]::backdrop { opacity: 0; }
+}
+/* content rises in a beat behind the panel */
+.cm-glass-dialog[open] :is(.cm-glass-dialog__title,
+  .cm-glass-dialog__copy, .cm-glass-dialog__actions) {
+  animation: cm-dialog-rise 520ms
+    cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.cm-glass-dialog[open] .cm-glass-dialog__copy {
+  animation-delay: 60ms;
+}
+.cm-glass-dialog[open] .cm-glass-dialog__actions {
+  animation-delay: 110ms;
+}
+@keyframes cm-dialog-rise {
+  from { opacity: 0; transform: translateY(10px); }
+}
+.cm-glass-dialog__body { padding: 28px; }
+.cm-glass-dialog__title {
+  margin: 0;
+  font: 600 24px/1.15 Georgia, serif;
+}
+.cm-glass-dialog__copy {
+  margin: 10px 0 0;
+  color: var(--cm-dialog-muted);
+  font: 400 15px/1.55 system-ui, sans-serif;
+}
+.cm-glass-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+.cm-glass-dialog__button {
+  padding: 10px 16px;
+  border: 1px solid color-mix(in oklch,
+    var(--cm-dialog-text) 30%, transparent);
+  border-radius: 12px;
+  background: color-mix(in oklch,
+    var(--cm-dialog-text) 10%, transparent);
+  color: var(--cm-dialog-text);
+  font: 600 14px/1.2 system-ui, sans-serif;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.cm-glass-dialog__button:hover {
+  background: color-mix(in oklch,
+    var(--cm-dialog-text) 20%, transparent);
+}
+.cm-glass-dialog__button--primary {
+  border-color: transparent;
+  background: var(--cm-dialog-text);
+  color: oklch(0.24 0.015 60);
+}
+.cm-glass-dialog__button--primary:hover {
+  background: color-mix(in oklch,
+    var(--cm-dialog-text) 86%, black);
+}
+.cm-glass-dialog__button:focus-visible {
+  outline: 2px solid var(--cm-dialog-text);
+  outline-offset: 3px;
+}
+/* scroll lock, no JS */
+body:has(.cm-glass-dialog[open]) { overflow: hidden; }
+
+@supports not ((backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))) {
+  .cm-glass-dialog { background: oklch(0.24 0.015 60); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-glass-dialog,
+  .cm-glass-dialog::backdrop { transition: none; }
+  .cm-glass-dialog[open] :is(.cm-glass-dialog__title,
+    .cm-glass-dialog__copy,
+    .cm-glass-dialog__actions) { animation: none; }
+}
   </style>
 </head>
 <body>
@@ -593,129 +953,11 @@
             </div>
             <div class="code-panel">
               <div class="code-head row-between"><span>CSS</span><button class="copy-button" type="button" data-copy-target="nav-css">Copy</button></div>
-              <pre><code id="nav-css">.cm-frost-nav {
-  --cm-nav-text: oklch(0.98 0.01 85);
-  --cm-nav-muted: color-mix(in oklch,
-    var(--cm-nav-text) 64%, transparent);
-  --cm-nav-tint: oklch(0.2 0.015 60 / 0.64);
-  --cm-nav-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  position: sticky;
-  top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 10px 10px 10px 18px;
-  border: 1px solid color-mix(in oklch,
-    var(--cm-nav-text) 30%, transparent);
-  border-radius: 16px;
-  color: var(--cm-nav-text);
-  background: linear-gradient(
-    color-mix(in oklch, var(--cm-nav-text) 12%, transparent),
-    color-mix(in oklch, var(--cm-nav-text) 12%, transparent)),
-    var(--cm-nav-tint);
-  box-shadow:
-    inset 0 1px 0 color-mix(in oklch,
-      var(--cm-nav-text) 36%, transparent),
-    0 16px 36px oklch(0.08 0.01 60 / 0.46);
-  backdrop-filter: blur(18px) saturate(1.3);
-  -webkit-backdrop-filter: blur(18px) saturate(1.3);
-}
-
-.cm-frost-nav__brand {
-  color: inherit;
-  font: 700 16px/1.2 system-ui, sans-serif;
-  text-decoration: none;
-}
-.cm-frost-nav__links {
-  position: relative;
-  display: flex;
-  padding: 2px;
-  border-radius: 11px;
-  background: color-mix(in oklch, black 12%, transparent);
-}
-.cm-frost-nav__pill {
-  position: absolute;
-  inset-block: 2px;
-  left: 0;
-  width: var(--cm-pill-width, 0);
-  border: 1px solid color-mix(in oklch,
-    var(--cm-nav-text) 22%, transparent);
-  border-radius: 9px;
-  background: color-mix(in oklch,
-    var(--cm-nav-text) 15%, transparent);
-  transform: translateX(var(--cm-pill-x, 0));
-  transition: width 250ms var(--cm-nav-ease),
-    transform 250ms var(--cm-nav-ease);
-}
-.cm-frost-nav__links a {
-  position: relative;
-  z-index: 1;
-  padding: 8px 12px;
-  border-radius: 9px;
-  color: var(--cm-nav-muted);
-  font: 550 13px/1.2 system-ui, sans-serif;
-  text-decoration: none;
-  transition: color 150ms ease;
-}
-.cm-frost-nav__links a:hover,
-.cm-frost-nav__links a:focus-visible,
-.cm-frost-nav__links a[aria-current=&quot;page&quot;] {
-  color: var(--cm-nav-text);
-}
-.cm-frost-nav__links a:focus-visible {
-  outline: 2px solid var(--cm-nav-text);
-  outline-offset: -2px;
-}
-
-@supports not ((backdrop-filter: blur(1px)) or
-  (-webkit-backdrop-filter: blur(1px))) {
-  .cm-frost-nav { background: oklch(0.22 0.01 60); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cm-frost-nav__pill,
-  .cm-frost-nav__links a { transition: none; }
-}
-
-@media (max-width: 520px) {
-  .cm-frost-nav__links a:last-child { display: none; }
-}</code></pre>
+              <pre><code id="nav-css">Loading the source…</code></pre>
             </div>
             <div class="code-panel code-panel--wide">
               <div class="code-head row-between"><span>JavaScript</span><button class="copy-button" type="button" data-copy-target="nav-js">Copy</button></div>
-              <pre><code id="nav-js">document.querySelectorAll('.cm-frost-nav').forEach(function (nav) {
-  var group = nav.querySelector('.cm-frost-nav__links');
-  var links = Array.from(group.querySelectorAll('a'));
-  var current = group.querySelector('[aria-current=&quot;page&quot;]') || links[0];
-
-  function movePill(link) {
-    group.style.setProperty('--cm-pill-x', link.offsetLeft + 'px');
-    group.style.setProperty('--cm-pill-width', link.offsetWidth + 'px');
-  }
-
-  links.forEach(function (link) {
-    link.addEventListener('pointerenter', function () { movePill(link); });
-    link.addEventListener('focus', function () { movePill(link); });
-    link.addEventListener('click', function () {
-      current.removeAttribute('aria-current');
-      current = link;
-      current.setAttribute('aria-current', 'page');
-      movePill(current);
-    });
-  });
-  group.addEventListener('pointerleave', function () { movePill(current); });
-  nav.addEventListener('focusout', function (event) {
-    var next = event.relatedTarget;
-    if (!(next instanceof Node) || !nav.contains(next)) movePill(current);
-  });
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(function () { movePill(current); }).observe(group);
-  } else {
-    window.addEventListener('resize', function () { movePill(current); });
-  }
-  requestAnimationFrame(function () { movePill(current); });
-});</code></pre>
+              <pre><code id="nav-js">Loading the source…</code></pre>
             </div>
           </div>
         </div>
@@ -763,154 +1005,11 @@
             </div>
             <div class="code-panel">
               <div class="code-head row-between"><span>CSS</span><button class="copy-button" type="button" data-copy-target="card-css">Copy</button></div>
-              <pre><code id="card-css">.cm-glass-card-wrap {
-  --cm-tilt-x: 0deg;
-  --cm-tilt-y: 0deg;
-  --cm-glare-x: 50%;
-  --cm-glare-y: 50%;
-  width: min(100%, 340px);
-  perspective: 1000px;
-  touch-action: pan-y;
-}
-.cm-glass-card {
-  --cm-card-text: oklch(0.98 0.01 85);
-  --cm-card-muted: color-mix(in oklch,
-    var(--cm-card-text) 68%, transparent);
-  --cm-card-tint: oklch(0.2 0.015 60 / 0.58);
-  --cm-card-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  position: relative;
-  display: block;
-  overflow: hidden;
-  padding: 28px;
-  border: 1px solid color-mix(in oklch,
-    var(--cm-card-text) 28%, transparent);
-  border-radius: 18px;
-  color: var(--cm-card-text);
-  background: linear-gradient(145deg,
-    color-mix(in oklch, var(--cm-card-text) 20%, transparent),
-    color-mix(in oklch, var(--cm-card-text) 7%, transparent)),
-    var(--cm-card-tint);
-  box-shadow:
-    inset 0 1px 0 color-mix(in oklch,
-      var(--cm-card-text) 38%, transparent),
-    0 18px 40px oklch(0.08 0.01 60 / 0.5);
-  backdrop-filter: blur(18px) saturate(1.2);
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
-  text-decoration: none;
-  transform: rotateX(var(--cm-tilt-x)) rotateY(var(--cm-tilt-y));
-  transform-style: preserve-3d;
-  transition: transform 700ms var(--cm-card-ease),
-    box-shadow 250ms var(--cm-card-ease);
-  will-change: transform;
-}
-.cm-glass-card-wrap.is-active .cm-glass-card {
-  transition-duration: 120ms, 250ms;
-}
-.cm-glass-card:hover {
-  box-shadow:
-    inset 0 1px 0 color-mix(in oklch,
-      var(--cm-card-text) 48%, transparent),
-    0 28px 54px oklch(0.08 0.01 60 / 0.58);
-}
-.cm-glass-card:active { scale: 0.985; }
-.cm-glass-card:focus-visible {
-  outline: 2px solid var(--cm-card-text);
-  outline-offset: 5px;
-}
-.cm-glass-card__glare {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  background: radial-gradient(circle at
-    var(--cm-glare-x) var(--cm-glare-y),
-    color-mix(in oklch, var(--cm-card-text) 34%, transparent),
-    transparent 44%);
-  mix-blend-mode: screen;
-  transition: opacity 300ms ease;
-}
-.cm-glass-card-wrap.is-active .cm-glass-card__glare { opacity: 0.72; }
-.cm-glass-card__meta,
-.cm-glass-card__title,
-.cm-glass-card__arrow {
-  position: relative;
-  z-index: 1;
-  transform: translateZ(22px);
-}
-.cm-glass-card__meta {
-  display: block;
-  margin-bottom: 56px;
-  color: var(--cm-card-muted);
-  font: 500 11px/1.3 ui-monospace, monospace;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.cm-glass-card__title {
-  display: block;
-  max-width: 12ch;
-  font: 600 28px/1.08 Georgia, serif;
-}
-.cm-glass-card__arrow {
-  display: block;
-  width: max-content;
-  margin-top: 20px;
-  color: var(--cm-card-muted);
-  font: 500 13px/1.2 system-ui, sans-serif;
-  transition: color 150ms ease, transform 350ms var(--cm-card-ease);
-}
-.cm-glass-card:hover .cm-glass-card__arrow {
-  color: var(--cm-card-text);
-  transform: translate3d(3px, 0, 22px);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or
-  (-webkit-backdrop-filter: blur(1px))) {
-  .cm-glass-card { background: var(--cm-card-tint); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cm-glass-card { transition: none; }
-  .cm-glass-card,
-  .cm-glass-card:hover { transform: none; }
-  .cm-glass-card__glare { display: none; }
-}</code></pre>
+              <pre><code id="card-css">Loading the source…</code></pre>
             </div>
             <div class="code-panel code-panel--wide">
               <div class="code-head row-between"><span>JavaScript</span><button class="copy-button" type="button" data-copy-target="card-js">Copy</button></div>
-              <pre><code id="card-js">var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-document.querySelectorAll('.cm-glass-card-wrap').forEach(function (wrap) {
-  var frame;
-
-  function reset() {
-    cancelAnimationFrame(frame);
-    wrap.classList.remove('is-active');
-    wrap.style.setProperty('--cm-tilt-x', '0deg');
-    wrap.style.setProperty('--cm-tilt-y', '0deg');
-  }
-
-  wrap.addEventListener('pointermove', function (event) {
-    if (reducedMotion.matches || event.pointerType === 'touch') return;
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(function () {
-      var rect = wrap.getBoundingClientRect();
-      if (!rect.width || !rect.height) return;
-      var x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
-      var y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
-      wrap.classList.add('is-active');
-      wrap.style.setProperty('--cm-tilt-x', ((0.5 - y) * 12).toFixed(2) + 'deg');
-      wrap.style.setProperty('--cm-tilt-y', ((x - 0.5) * 12).toFixed(2) + 'deg');
-      wrap.style.setProperty('--cm-glare-x', (x * 100).toFixed(1) + '%');
-      wrap.style.setProperty('--cm-glare-y', (y * 100).toFixed(1) + '%');
-    });
-  });
-  wrap.addEventListener('pointerleave', reset);
-  wrap.addEventListener('pointercancel', reset);
-  wrap.addEventListener('focusout', function (event) {
-    var next = event.relatedTarget;
-    if (!(next instanceof Node) || !wrap.contains(next)) reset();
-  });
-});</code></pre>
+              <pre><code id="card-js">Loading the source…</code></pre>
             </div>
           </div>
         </div>
@@ -956,120 +1055,11 @@ document.querySelectorAll('.cm-glass-card-wrap').forEach(function (wrap) {
             </div>
             <div class="code-panel">
               <div class="code-head row-between"><span>CSS</span><button class="copy-button" type="button" data-copy-target="toggle-css">Copy</button></div>
-              <pre><code id="toggle-css">.cm-glass-toggle {
-  --cm-toggle-text: oklch(0.98 0.01 85);
-  --cm-toggle-accent: oklch(0.55 0.14 40);
-  --cm-toggle-w: 64px;
-  --cm-toggle-h: 36px;
-  /* overshoot easing = the spring */
-  --cm-toggle-ease: cubic-bezier(0.3, 0.7, 0.4, 1.3);
-  position: relative;
-  width: var(--cm-toggle-w);
-  height: var(--cm-toggle-h);
-  flex: none;
-  padding: 0;
-  appearance: none;
-  cursor: pointer;
-  border: 1px solid color-mix(in oklch,
-    var(--cm-toggle-text) 30%, transparent);
-  border-radius: 999px;
-  background: linear-gradient(180deg,
-    color-mix(in oklch, black 30%, transparent),
-    color-mix(in oklch, var(--cm-toggle-text) 6%, transparent)),
-    oklch(0.2 0.015 60 / 0.6);
-  box-shadow:
-    inset 0 2px 6px color-mix(in oklch, black 40%, transparent),
-    inset 0 -1px 0 color-mix(in oklch,
-      var(--cm-toggle-text) 18%, transparent),
-    0 10px 24px oklch(0.08 0.01 60 / 0.4);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  transition: background 180ms ease, border-color 180ms ease,
-    box-shadow 220ms ease;
-}
-.cm-glass-toggle::after {
-  content: '';
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: calc(var(--cm-toggle-h) - 8px);
-  height: calc(var(--cm-toggle-h) - 8px);
-  border-radius: 50%;
-  background: linear-gradient(180deg,
-    #ffffff, #cfd3d8 78%, #b9bec5);
-  box-shadow: inset 0 1px 0 #fff,
-    inset 0 -2px 3px rgba(0,0,0,0.22),
-    0 3px 8px rgba(0,0,0,0.45);
-  transition: transform 320ms var(--cm-toggle-ease),
-    width 320ms var(--cm-toggle-ease);
-}
-.cm-glass-toggle[aria-checked="true"] {
-  border-color: color-mix(in oklch,
-    var(--cm-toggle-accent) 70%, white);
-  background: linear-gradient(180deg,
-    color-mix(in oklch, black 16%, transparent),
-    color-mix(in oklch, var(--cm-toggle-text) 8%, transparent)),
-    color-mix(in oklch, var(--cm-toggle-accent) 72%,
-      oklch(0.2 0.015 60));
-  /* accent glow energizes the "on" state */
-  box-shadow:
-    inset 0 2px 6px color-mix(in oklch, black 34%, transparent),
-    inset 0 -1px 0 color-mix(in oklch,
-      var(--cm-toggle-text) 18%, transparent),
-    0 10px 24px oklch(0.08 0.01 60 / 0.4),
-    0 0 18px color-mix(in oklch,
-      var(--cm-toggle-accent) 45%, transparent);
-}
-.cm-glass-toggle[aria-checked="true"]::after {
-  transform: translateX(
-    calc(var(--cm-toggle-w) - var(--cm-toggle-h) + 2px));
-}
-/* press squash: thumb stretches toward the direction
-   of travel while held, same spring as the slide */
-.cm-glass-toggle:active::after {
-  width: calc(var(--cm-toggle-h) - 2px);
-}
-/* pressed while checked: pin the right edge so the
-   stretch grows inward, not past the track */
-.cm-glass-toggle[aria-checked="true"]:active::after {
-  transform: translateX(
-    calc(var(--cm-toggle-w) - var(--cm-toggle-h) - 4px));
-}
-.cm-glass-toggle:focus-visible {
-  outline: 2px solid var(--cm-toggle-text);
-  outline-offset: 4px;
-}
-.cm-glass-toggle-row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  color: oklch(0.98 0.01 85);
-  font: 550 14px/1.2 system-ui, sans-serif;
-}
-.cm-glass-toggle-row span { cursor: pointer; user-select: none; }
-
-@supports not ((backdrop-filter: blur(1px)) or
-  (-webkit-backdrop-filter: blur(1px))) {
-  .cm-glass-toggle { background: oklch(0.24 0.015 60); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cm-glass-toggle::after { transition: none; }
-}</code></pre>
+              <pre><code id="toggle-css">Loading the source…</code></pre>
             </div>
             <div class="code-panel code-panel--wide">
               <div class="code-head row-between"><span>JavaScript</span><button class="copy-button" type="button" data-copy-target="toggle-js">Copy</button></div>
-              <pre><code id="toggle-js">document.querySelectorAll('.cm-glass-toggle').forEach(function (toggle) {
-  function flip() {
-    toggle.setAttribute('aria-checked',
-      toggle.getAttribute('aria-checked') !== 'true');
-  }
-  toggle.addEventListener('click', flip);
-  // clicking the visible label toggles too
-  var row = toggle.closest('.cm-glass-toggle-row');
-  var label = row &amp;&amp; row.querySelector('span');
-  if (label) label.addEventListener('click', flip);
-});</code></pre>
+              <pre><code id="toggle-js">Loading the source…</code></pre>
             </div>
           </div>
         </div>
@@ -1129,96 +1119,7 @@ document.querySelectorAll('.cm-glass-card-wrap').forEach(function (wrap) {
             </div>
             <div class="code-panel">
               <div class="code-head row-between"><span>CSS</span><button class="copy-button" type="button" data-copy-target="input-css">Copy</button></div>
-              <pre><code id="input-css">.cm-glass-field {
-  --cm-field-text: oklch(0.98 0.01 85);
-  --cm-field-muted: color-mix(in oklch,
-    var(--cm-field-text) 55%, transparent);
-  --cm-field-accent: oklch(0.74 0.11 45);
-  --cm-field-danger: oklch(0.78 0.13 40);
-  display: grid;
-  gap: 8px;
-  width: min(100%, 300px);
-  color: var(--cm-field-text);
-}
-.cm-glass-field__label {
-  font: 500 11px/1.3 ui-monospace, monospace;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cm-field-muted);
-  transition: color 200ms ease;
-}
-/* label lights up while the field is focused */
-.cm-glass-field:focus-within .cm-glass-field__label {
-  color: var(--cm-field-accent);
-}
-.cm-glass-field:focus-within:has(
-  .cm-glass-input[aria-invalid="true"]) .cm-glass-field__label {
-  color: var(--cm-field-danger);
-}
-.cm-glass-input {
-  width: 100%;
-  padding: 13px 16px;
-  border: 1px solid color-mix(in oklch,
-    var(--cm-field-text) 26%, transparent);
-  border-radius: 14px;
-  background: linear-gradient(180deg,
-    color-mix(in oklch, black 26%, transparent),
-    color-mix(in oklch, black 8%, transparent) 55%),
-    oklch(0.2 0.015 60 / 0.55);
-  color: var(--cm-field-text);
-  font: 400 15px/1.4 system-ui, sans-serif;
-  box-shadow:
-    inset 0 2px 6px color-mix(in oklch, black 38%, transparent),
-    inset 0 -1px 0 color-mix(in oklch,
-      var(--cm-field-text) 16%, transparent);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  transition: border-color 200ms ease, box-shadow 200ms ease;
-}
-.cm-glass-input::placeholder { color: var(--cm-field-muted); }
-/* a filled field earns a slightly brighter edge */
-.cm-glass-input:not(:placeholder-shown) {
-  border-color: color-mix(in oklch,
-    var(--cm-field-text) 40%, transparent);
-}
-.cm-glass-input:focus {
-  outline: 0;
-  border-color: color-mix(in oklch,
-    var(--cm-field-text) 62%, transparent);
-  box-shadow:
-    inset 0 2px 6px color-mix(in oklch, black 38%, transparent),
-    0 0 0 3px color-mix(in oklch,
-      var(--cm-field-text) 18%, transparent);
-}
-.cm-glass-input[aria-invalid="true"] {
-  border-color: var(--cm-field-danger);
-  box-shadow:
-    inset 0 2px 6px color-mix(in oklch, black 38%, transparent),
-    0 0 0 3px color-mix(in oklch,
-      var(--cm-field-danger) 24%, transparent);
-}
-.cm-glass-field__error {
-  display: none;
-  margin: 0;
-  color: var(--cm-field-danger);
-  font-size: 13px;
-}
-.cm-glass-input[aria-invalid="true"] ~ .cm-glass-field__error {
-  display: block;
-  animation: cm-field-error-in 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-@keyframes cm-field-error-in {
-  from { opacity: 0; transform: translateY(-4px); }
-}
-
-@supports not ((backdrop-filter: blur(1px)) or
-  (-webkit-backdrop-filter: blur(1px))) {
-  .cm-glass-input { background: oklch(0.24 0.015 60); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .cm-glass-field__error { animation: none; }
-}</code></pre>
+              <pre><code id="input-css">Loading the source…</code></pre>
             </div>
           </div>
         </div>
@@ -1283,172 +1184,11 @@ document.querySelectorAll('.cm-glass-card-wrap').forEach(function (wrap) {
             </div>
             <div class="code-panel">
               <div class="code-head row-between"><span>CSS</span><button class="copy-button" type="button" data-copy-target="dialog-css">Copy</button></div>
-              <pre><code id="dialog-css">.cm-glass-dialog {
-  --cm-dialog-text: oklch(0.98 0.01 85);
-  --cm-dialog-muted: color-mix(in oklch,
-    var(--cm-dialog-text) 62%, transparent);
-  --cm-dialog-accent: oklch(0.55 0.14 40);
-  width: min(92vw, 410px);
-  padding: 0;
-  border: 0;
-  border-radius: 22px;
-  color: var(--cm-dialog-text);
-  background:
-    radial-gradient(120% 90% at 18% 0%,
-      color-mix(in oklch, var(--cm-dialog-text) 20%, transparent),
-      transparent 55%),
-    linear-gradient(165deg,
-      color-mix(in oklch, var(--cm-dialog-text) 14%, transparent),
-      color-mix(in oklch, var(--cm-dialog-text) 5%, transparent)),
-    oklch(0.22 0.015 60 / 0.82);
-  box-shadow:
-    inset 0 1px 0 color-mix(in oklch,
-      var(--cm-dialog-text) 42%, transparent),
-    inset 0 -14px 30px color-mix(in oklch,
-      black 22%, transparent),
-    0 34px 90px oklch(0.08 0.01 60 / 0.65),
-    0 0 70px color-mix(in oklch,
-      var(--cm-dialog-accent) 16%, transparent);
-  backdrop-filter: blur(18px) saturate(1.25);
-  -webkit-backdrop-filter: blur(18px) saturate(1.25);
-}
-/* bezel ring: masked 1.5px band with its own
-   backdrop-filter, so the edge samples and brightens
-   whatever sits behind the dialog */
-.cm-glass-dialog::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  pointer-events: none;
-  -webkit-mask: linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  background: linear-gradient(165deg,
-    color-mix(in oklch, var(--cm-dialog-text) 85%, transparent),
-    color-mix(in oklch,
-      var(--cm-dialog-text) 22%, transparent) 45%,
-    color-mix(in oklch, var(--cm-dialog-text) 55%, transparent));
-  -webkit-backdrop-filter: blur(4px) brightness(1.5)
-    saturate(1.3);
-  backdrop-filter: blur(4px) brightness(1.5) saturate(1.3);
-}
-/* specular sheen across the top edge */
-.cm-glass-dialog::after {
-  content: '';
-  position: absolute;
-  inset: 0 0 60%;
-  border-radius: 22px 22px 0 0;
-  pointer-events: none;
-  background: radial-gradient(140% 100% at 50% -30%,
-    color-mix(in oklch, var(--cm-dialog-text) 26%, transparent),
-    transparent 62%);
-}
-.cm-glass-dialog::backdrop {
-  background: oklch(0.1 0.01 60 / 0.5);
-  -webkit-backdrop-filter: blur(8px) saturate(0.9);
-  backdrop-filter: blur(8px) saturate(0.9);
-}
-.cm-glass-dialog[open] {
-  animation: cm-dialog-in 460ms cubic-bezier(0.26, 1.2, 0.4, 1);
-}
-.cm-glass-dialog[open]::backdrop {
-  animation: cm-dialog-fade 460ms ease;
-}
-/* content rises in a beat behind the panel */
-.cm-glass-dialog[open] :is(.cm-glass-dialog__title,
-  .cm-glass-dialog__copy, .cm-glass-dialog__actions) {
-  animation: cm-dialog-rise 520ms
-    cubic-bezier(0.22, 1, 0.36, 1) backwards;
-}
-.cm-glass-dialog[open] .cm-glass-dialog__copy {
-  animation-delay: 60ms;
-}
-.cm-glass-dialog[open] .cm-glass-dialog__actions {
-  animation-delay: 110ms;
-}
-@keyframes cm-dialog-in {
-  from {
-    opacity: 0;
-    transform: translateY(22px) scale(0.92);
-    filter: blur(8px);
-  }
-}
-@keyframes cm-dialog-rise {
-  from { opacity: 0; transform: translateY(10px); }
-}
-@keyframes cm-dialog-fade { from { opacity: 0; } }
-.cm-glass-dialog__body { padding: 28px; }
-.cm-glass-dialog__title {
-  margin: 0;
-  font: 600 24px/1.15 Georgia, serif;
-}
-.cm-glass-dialog__copy {
-  margin: 10px 0 0;
-  color: var(--cm-dialog-muted);
-  font: 400 15px/1.55 system-ui, sans-serif;
-}
-.cm-glass-dialog__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 24px;
-}
-.cm-glass-dialog__button {
-  padding: 10px 16px;
-  border: 1px solid color-mix(in oklch,
-    var(--cm-dialog-text) 30%, transparent);
-  border-radius: 12px;
-  background: color-mix(in oklch,
-    var(--cm-dialog-text) 10%, transparent);
-  color: var(--cm-dialog-text);
-  font: 600 14px/1.2 system-ui, sans-serif;
-  transition: background 160ms ease, border-color 160ms ease;
-}
-.cm-glass-dialog__button:hover {
-  background: color-mix(in oklch,
-    var(--cm-dialog-text) 20%, transparent);
-}
-.cm-glass-dialog__button--primary {
-  border-color: transparent;
-  background: var(--cm-dialog-text);
-  color: oklch(0.24 0.015 60);
-}
-.cm-glass-dialog__button--primary:hover {
-  background: color-mix(in oklch,
-    var(--cm-dialog-text) 86%, black);
-}
-.cm-glass-dialog__button:focus-visible {
-  outline: 2px solid var(--cm-dialog-text);
-  outline-offset: 3px;
-}
-/* scroll lock, no JS */
-body:has(.cm-glass-dialog[open]) { overflow: hidden; }
-
-@media (prefers-reduced-motion: reduce) {
-  .cm-glass-dialog[open],
-  .cm-glass-dialog[open]::backdrop,
-  .cm-glass-dialog[open] :is(.cm-glass-dialog__title,
-    .cm-glass-dialog__copy,
-    .cm-glass-dialog__actions) { animation: none; }
-}</code></pre>
+              <pre><code id="dialog-css">Loading the source…</code></pre>
             </div>
             <div class="code-panel code-panel--wide">
               <div class="code-head row-between"><span>JavaScript</span><button class="copy-button" type="button" data-copy-target="dialog-js">Copy</button></div>
-              <pre><code id="dialog-js">document.querySelectorAll('[data-dialog-open]').forEach(function (opener) {
-  var dialog = document.getElementById(opener.getAttribute('data-dialog-open'));
-  if (!dialog) return;
-  opener.addEventListener('click', function () { dialog.showModal(); });
-  // clicks on ::backdrop dispatch to the dialog element itself; the inner
-  // body div covers the whole panel, so target === dialog means "outside"
-  dialog.addEventListener('click', function (event) {
-    if (event.target === dialog) dialog.close();
-  });
-});</code></pre>
+              <pre><code id="dialog-js">Loading the source…</code></pre>
             </div>
           </div>
         </div>
@@ -1474,94 +1214,125 @@ body:has(.cm-glass-dialog[open]) { overflow: hidden; }
 
   <p id="copy-status" class="meta" role="status" aria-live="polite" style="position:fixed;left:-9999px;"></p>
 
+  <!-- Component behavior. Same deal as the styles: each data-code script
+       runs the demo above AND is mirrored verbatim into its code panel. -->
+
+  <script data-code="nav-js">
+document.querySelectorAll('.cm-frost-nav').forEach(function (nav) {
+  var group = nav.querySelector('.cm-frost-nav__links');
+  if (!group) return;
+  var links = Array.from(group.querySelectorAll('a'));
+  var current = group.querySelector('[aria-current="page"]') || links[0];
+  if (!current) return;
+
+  function movePill(link) {
+    group.style.setProperty('--cm-pill-x', link.offsetLeft + 'px');
+    group.style.setProperty('--cm-pill-width', link.offsetWidth + 'px');
+  }
+
+  links.forEach(function (link) {
+    link.addEventListener('pointerenter', function () { movePill(link); });
+    link.addEventListener('focus', function () { movePill(link); });
+    link.addEventListener('click', function () {
+      current.removeAttribute('aria-current');
+      current = link;
+      current.setAttribute('aria-current', 'page');
+      movePill(current);
+    });
+  });
+  group.addEventListener('pointerleave', function () { movePill(current); });
+  nav.addEventListener('focusout', function (event) {
+    var next = event.relatedTarget;
+    if (!(next instanceof Node) || !nav.contains(next)) movePill(current);
+  });
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function () { movePill(current); }).observe(group);
+  } else {
+    window.addEventListener('resize', function () { movePill(current); });
+  }
+  requestAnimationFrame(function () { movePill(current); });
+});
+  </script>
+
+  <script data-code="card-js">
+var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+document.querySelectorAll('.cm-glass-card-wrap').forEach(function (wrap) {
+  var frame;
+
+  function reset() {
+    cancelAnimationFrame(frame);
+    wrap.classList.remove('is-active');
+    wrap.style.setProperty('--cm-tilt-x', '0deg');
+    wrap.style.setProperty('--cm-tilt-y', '0deg');
+  }
+
+  wrap.addEventListener('pointermove', function (event) {
+    if (reducedMotion.matches || event.pointerType === 'touch') return;
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(function () {
+      var rect = wrap.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      var x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
+      var y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
+      wrap.classList.add('is-active');
+      wrap.style.setProperty('--cm-tilt-x', ((0.5 - y) * 12).toFixed(2) + 'deg');
+      wrap.style.setProperty('--cm-tilt-y', ((x - 0.5) * 12).toFixed(2) + 'deg');
+      wrap.style.setProperty('--cm-glare-x', (x * 100).toFixed(1) + '%');
+      wrap.style.setProperty('--cm-glare-y', (y * 100).toFixed(1) + '%');
+    });
+  });
+  wrap.addEventListener('pointerleave', reset);
+  wrap.addEventListener('pointercancel', reset);
+  wrap.addEventListener('focusout', function (event) {
+    var next = event.relatedTarget;
+    if (!(next instanceof Node) || !wrap.contains(next)) reset();
+  });
+});
+  </script>
+
+  <script data-code="toggle-js">
+document.querySelectorAll('.cm-glass-toggle').forEach(function (toggle) {
+  function flip() {
+    toggle.setAttribute('aria-checked',
+      toggle.getAttribute('aria-checked') !== 'true');
+  }
+  toggle.addEventListener('click', flip);
+  // clicking the visible label toggles too
+  var row = toggle.closest('.cm-glass-toggle-row');
+  var label = row && row.querySelector('span');
+  if (label) label.addEventListener('click', flip);
+});
+  </script>
+
+  <script data-code="dialog-js">
+document.querySelectorAll('[data-dialog-open]').forEach(function (opener) {
+  var dialog = document.getElementById(opener.getAttribute('data-dialog-open'));
+  if (!dialog) return;
+  opener.addEventListener('click', function () { dialog.showModal(); });
+  // clicks on ::backdrop dispatch to the dialog element itself; the inner
+  // body div covers the whole panel, so target === dialog means "outside".
+  // The press must START on the backdrop too, so a text-selection drag
+  // that ends outside the panel doesn't dismiss the dialog.
+  var pressedOutside = false;
+  dialog.addEventListener('pointerdown', function (event) {
+    pressedOutside = event.target === dialog;
+  });
+  dialog.addEventListener('click', function (event) {
+    if (pressedOutside && event.target === dialog) dialog.close();
+    pressedOutside = false;
+  });
+});
+  </script>
+
   <script>
     (function () {
-      document.querySelectorAll('.cm-frost-nav').forEach(function (nav) {
-        var group = nav.querySelector('.cm-frost-nav__links');
-        if (!group) return;
-        var links = Array.from(group.querySelectorAll('a'));
-        var current = group.querySelector('[aria-current="page"]') || links[0];
-        if (!current) return;
-
-        function movePill(link) {
-          group.style.setProperty('--cm-pill-x', link.offsetLeft + 'px');
-          group.style.setProperty('--cm-pill-width', link.offsetWidth + 'px');
-        }
-
-        links.forEach(function (link) {
-          link.addEventListener('pointerenter', function () { movePill(link); });
-          link.addEventListener('focus', function () { movePill(link); });
-          link.addEventListener('click', function () {
-            current.removeAttribute('aria-current');
-            current = link;
-            current.setAttribute('aria-current', 'page');
-            movePill(current);
-          });
-        });
-        group.addEventListener('pointerleave', function () { movePill(current); });
-        nav.addEventListener('focusout', function (event) {
-          var next = event.relatedTarget;
-          if (!(next instanceof Node) || !nav.contains(next)) movePill(current);
-        });
-        if ('ResizeObserver' in window) {
-          new ResizeObserver(function () { movePill(current); }).observe(group);
-        } else {
-          window.addEventListener('resize', function () { movePill(current); });
-        }
-        requestAnimationFrame(function () { movePill(current); });
-      });
-
-      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      document.querySelectorAll('.cm-glass-card-wrap').forEach(function (wrap) {
-        var frame;
-
-        function resetTilt() {
-          cancelAnimationFrame(frame);
-          wrap.classList.remove('is-active');
-          wrap.style.setProperty('--cm-tilt-x', '0deg');
-          wrap.style.setProperty('--cm-tilt-y', '0deg');
-        }
-
-        wrap.addEventListener('pointermove', function (event) {
-          if (reducedMotion.matches || event.pointerType === 'touch') return;
-          cancelAnimationFrame(frame);
-          frame = requestAnimationFrame(function () {
-            var rect = wrap.getBoundingClientRect();
-            if (!rect.width || !rect.height) return;
-            var x = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width));
-            var y = Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height));
-            wrap.classList.add('is-active');
-            wrap.style.setProperty('--cm-tilt-x', ((0.5 - y) * 12).toFixed(2) + 'deg');
-            wrap.style.setProperty('--cm-tilt-y', ((x - 0.5) * 12).toFixed(2) + 'deg');
-            wrap.style.setProperty('--cm-glare-x', (x * 100).toFixed(1) + '%');
-            wrap.style.setProperty('--cm-glare-y', (y * 100).toFixed(1) + '%');
-          });
-        });
-        wrap.addEventListener('pointerleave', resetTilt);
-        wrap.addEventListener('pointercancel', resetTilt);
-        wrap.addEventListener('focusout', function (event) {
-          var next = event.relatedTarget;
-          if (!(next instanceof Node) || !wrap.contains(next)) resetTilt();
-        });
-      });
-      document.querySelectorAll('.cm-glass-toggle').forEach(function (toggle) {
-        function flip() {
-          toggle.setAttribute('aria-checked', toggle.getAttribute('aria-checked') !== 'true');
-        }
-        toggle.addEventListener('click', flip);
-        var row = toggle.closest('.cm-glass-toggle-row');
-        var label = row && row.querySelector('span');
-        if (label) label.addEventListener('click', flip);
-      });
-
-      document.querySelectorAll('[data-dialog-open]').forEach(function (opener) {
-        var dialog = document.getElementById(opener.getAttribute('data-dialog-open'));
-        if (!dialog) return;
-        opener.addEventListener('click', function () { dialog.showModal(); });
-        dialog.addEventListener('click', function (event) {
-          if (event.target === dialog) dialog.close();
-        });
+      // Every CSS/JS code panel is filled from the same data-code blocks
+      // that style and drive the demos above, so the published source can
+      // never drift from what this page actually runs.
+      document.querySelectorAll('[data-code]').forEach(function (source) {
+        var target = document.getElementById(source.getAttribute('data-code'));
+        if (target) target.textContent = source.textContent.trim();
       });
 
       var liquidSource = document.getElementById('liquid-js');
