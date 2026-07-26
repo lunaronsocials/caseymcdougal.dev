@@ -451,6 +451,7 @@
 .cm-glass-toggle {
   --cm-toggle-text: oklch(0.98 0.01 85);
   --cm-toggle-accent: oklch(0.55 0.14 40);
+  --cm-toggle-tint: oklch(0.2 0.015 60 / 0.6);
   --cm-toggle-w: 64px;
   --cm-toggle-h: 36px;
   /* overshoot easing = the spring */
@@ -468,7 +469,7 @@
   background: linear-gradient(180deg,
     color-mix(in oklch, black 30%, transparent),
     color-mix(in oklch, var(--cm-toggle-text) 6%, transparent)),
-    oklch(0.2 0.015 60 / 0.6);
+    var(--cm-toggle-tint);
   box-shadow:
     inset 0 2px 6px color-mix(in oklch, black 40%, transparent),
     inset 0 -1px 0 color-mix(in oklch,
@@ -478,6 +479,13 @@
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
   transition: background 180ms ease, border-color 180ms ease,
     box-shadow 220ms ease;
+}
+/* invisible hit-area extension: the track stays 36px tall
+   visually, but the touch target clears 44px */
+.cm-glass-toggle::before {
+  content: '';
+  position: absolute;
+  inset: -8px -4px;
 }
 .cm-glass-toggle::after {
   content: '';
@@ -557,6 +565,7 @@
     var(--cm-field-text) 55%, transparent);
   --cm-field-accent: oklch(0.74 0.11 45);
   --cm-field-danger: oklch(0.78 0.13 40);
+  --cm-field-tint: oklch(0.2 0.015 60 / 0.55);
   display: grid;
   gap: 8px;
   width: min(100%, 300px);
@@ -586,7 +595,7 @@
   background: linear-gradient(180deg,
     color-mix(in oklch, black 26%, transparent),
     color-mix(in oklch, black 8%, transparent) 55%),
-    oklch(0.2 0.015 60 / 0.55);
+    var(--cm-field-tint);
   color: var(--cm-field-text);
   font: 400 15px/1.4 system-ui, sans-serif;
   box-shadow:
@@ -611,6 +620,16 @@
     inset 0 2px 6px color-mix(in oklch, black 38%, transparent),
     0 0 0 3px color-mix(in oklch,
       var(--cm-field-text) 18%, transparent);
+}
+/* Chrome's opaque autofill yellow would flood the glass; the
+   absurdly long transition defers that repaint indefinitely */
+.cm-glass-input:-webkit-autofill,
+.cm-glass-input:-webkit-autofill:hover,
+.cm-glass-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--cm-field-text);
+  caret-color: var(--cm-field-text);
+  transition: background-color 9999999s ease-in-out 0s,
+    border-color 200ms ease, box-shadow 200ms ease;
 }
 .cm-glass-input[aria-invalid="true"] {
   border-color: var(--cm-field-danger);
@@ -649,6 +668,7 @@
   --cm-dialog-muted: color-mix(in oklch,
     var(--cm-dialog-text) 62%, transparent);
   --cm-dialog-accent: oklch(0.55 0.14 40);
+  --cm-dialog-tint: oklch(0.22 0.015 60 / 0.82);
   width: min(92vw, 410px);
   padding: 0;
   border: 0;
@@ -661,7 +681,7 @@
     linear-gradient(165deg,
       color-mix(in oklch, var(--cm-dialog-text) 14%, transparent),
       color-mix(in oklch, var(--cm-dialog-text) 5%, transparent)),
-    oklch(0.22 0.015 60 / 0.82);
+    var(--cm-dialog-tint);
   box-shadow:
     inset 0 1px 0 color-mix(in oklch,
       var(--cm-dialog-text) 42%, transparent),
@@ -901,6 +921,9 @@ body:has(.cm-glass-dialog[open]) { overflow: hidden; }
     orbSettings: { speed: 0.5, rgbSplit: 0.03 },
     glass: { refraction: 32, dispersion: 0.35 }
   });
+
+  // SPA teardown: stops the loop, restores the button
+  CMLiquidButton.destroy(document.querySelector('#cta'));
 &lt;/script&gt;
 
 &lt;!-- set label color per surface --&gt;
@@ -1036,12 +1059,12 @@ body:has(.cm-glass-dialog[open]) { overflow: hidden; }
           <span class="demo-label">LIVE · CLICK, TAB + SPACE</span>
           <div class="state-row" style="flex-direction: column; align-items: flex-start; gap: 22px;">
             <div class="cm-glass-toggle-row">
-              <button class="cm-glass-toggle" type="button" role="switch" aria-checked="true" aria-label="Ambient sync"></button>
-              <span aria-hidden="true">Ambient sync</span>
+              <button class="cm-glass-toggle" type="button" role="switch" aria-checked="true" aria-labelledby="toggle-ambient-label"></button>
+              <span id="toggle-ambient-label">Ambient sync</span>
             </div>
             <div class="cm-glass-toggle-row">
-              <button class="cm-glass-toggle" type="button" role="switch" aria-checked="false" aria-label="Weekly digest"></button>
-              <span aria-hidden="true">Weekly digest</span>
+              <button class="cm-glass-toggle" type="button" role="switch" aria-checked="false" aria-labelledby="toggle-digest-label"></button>
+              <span id="toggle-digest-label">Weekly digest</span>
             </div>
           </div>
         </div>
@@ -1051,11 +1074,12 @@ body:has(.cm-glass-dialog[open]) { overflow: hidden; }
           <div class="source-grid">
             <div class="code-panel">
               <div class="code-head row-between"><span>HTML</span><button class="copy-button" type="button" data-copy-target="toggle-html">Copy</button></div>
-              <pre><code id="toggle-html">&lt;div class="cm-glass-toggle-row"&gt;
+              <pre><code id="toggle-html">&lt;!-- the visible text IS the accessible name --&gt;
+&lt;div class="cm-glass-toggle-row"&gt;
   &lt;button class="cm-glass-toggle" type="button"
     role="switch" aria-checked="true"
-    aria-label="Ambient sync"&gt;&lt;/button&gt;
-  &lt;span aria-hidden="true"&gt;Ambient sync&lt;/span&gt;
+    aria-labelledby="sync-label"&gt;&lt;/button&gt;
+  &lt;span id="sync-label"&gt;Ambient sync&lt;/span&gt;
 &lt;/div&gt;</code></pre>
             </div>
             <div class="code-panel">

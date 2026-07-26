@@ -12,6 +12,10 @@
  *  JS API: CMLiquidButton.upgrade(el, options) for full control —
  *    { preset, gradient:[...hex], orb, stroke, crispOrb, forceFallback,
  *      glass:{refraction,frost,dispersion,depth,light}, orbSettings:{...} }
+ *  Cleanup: CMLiquidButton.destroy(el) stops the render loop, disconnects
+ *    observers, and restores the original button — call it before removing
+ *    upgraded buttons in an SPA. Browsers cap live WebGL contexts (~8-16
+ *    per page), so keep the count of simultaneously upgraded buttons low.
  *
  *  Notes that cost real debugging time — keep them in mind when editing:
  *  - SVG-URL backdrop-filters only render in Chromium. Safari/Firefox parse
@@ -446,25 +450,42 @@
     var reduced = typeof matchMedia !== 'undefined' &&
       matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    var stopped = false;
+    var rafId = 0;
+    var io = null;
+    var ro = null;
+
     draw(performance.now()); // never blank: one frame immediately
     if (!reduced) {
       // don't burn frames while offscreen or in a hidden tab
       var visible = true;
       if (typeof IntersectionObserver !== 'undefined') {
-        new IntersectionObserver(function (entries) {
+        io = new IntersectionObserver(function (entries) {
           visible = entries[0].isIntersecting;
-        }).observe(canvas);
+        });
+        io.observe(canvas);
       }
       var loop = function (ms) {
+        if (stopped) return;
         if (visible && !document.hidden) draw(ms);
-        requestAnimationFrame(loop);
+        rafId = requestAnimationFrame(loop);
       };
-      requestAnimationFrame(loop);
+      rafId = requestAnimationFrame(loop);
     }
 
     if (typeof ResizeObserver !== 'undefined') {
-      new ResizeObserver(function () { draw(performance.now()); }).observe(canvas);
+      ro = new ResizeObserver(function () { if (!stopped) draw(performance.now()); });
+      ro.observe(canvas);
     }
+
+    // the destroy() handle: stop drawing and release the observers.
+    // Deliberately no loseContext() — see the header note.
+    return function () {
+      stopped = true;
+      cancelAnimationFrame(rafId);
+      if (io) io.disconnect();
+      if (ro) ro.disconnect();
+    };
   }
 
   /* ----------------------------------------------------------- component */
@@ -508,6 +529,8 @@
     }, o.orbSettings);
 
     var useSvgGlass = svgBackdropOK && !o.forceFallback;
+    var added = [];      // every node injected, so destroy() can undo it
+    var stopOrb = null;
     el.classList.add('lgb');
     if (!useSvgGlass) el.classList.add('lgb--fb');
     if (o.crispOrb) el.classList.add('lgb--crisp');
@@ -519,7 +542,9 @@
 
     if (o.glass !== false) {
       var fid = 'lgb-filter-' + (++uidCounter);
-      el.appendChild(buildGlassFilter(fid, g));
+      var filterSvg = buildGlassFilter(fid, g);
+      el.appendChild(filterSvg);
+      added.push(filterSvg);
       var glass = document.createElement('span');
       glass.className = 'lgb__glass';
       glass.setAttribute('aria-hidden', 'true');
@@ -534,6 +559,7 @@
         glass.style.webkitBackdropFilter = 'blur(' + (g.frost * 4 + 4) + 'px) saturate(1.5)';
       }
       el.appendChild(glass);
+      added.push(glass);
     }
 
     if (o.stroke) {
@@ -542,6 +568,7 @@
       stroke.setAttribute('aria-hidden', 'true');
       stroke.style.setProperty('--lgb-stroke-stops', stops.concat(stops[0]).join(', '));
       el.appendChild(stroke);
+      added.push(stroke);
     }
 
     if (o.orb) {
@@ -564,11 +591,29 @@
         orbtop.appendChild(icon);
       }
       el.appendChild(orbtop);
+      added.push(orb, orbtop);
 
-      startOrb(canvas, stops, orbSettings);
+      stopOrb = startOrb(canvas, stops, orbSettings) || null;
     }
 
     el.appendChild(label);
+    el._lgb = { added: added, label: label, stopOrb: stopOrb };
+    return el;
+  }
+
+  function destroy(el) {
+    var rec = el._lgb;
+    if (!rec) return el;
+    if (rec.stopOrb) rec.stopOrb();
+    rec.added.forEach(function (node) {
+      if (node.parentNode) node.parentNode.removeChild(node);
+    });
+    // unwrap the label so the button's original content is restored
+    while (rec.label.firstChild) el.insertBefore(rec.label.firstChild, rec.label);
+    if (rec.label.parentNode) rec.label.parentNode.removeChild(rec.label);
+    el.classList.remove('lgb', 'lgb--fb', 'lgb--crisp');
+    delete el.dataset.lgbReady;
+    delete el._lgb;
     return el;
   }
 
@@ -582,5 +627,5 @@
     init();
   }
 
-  window.CMLiquidButton = { upgrade: upgrade, init: init, PRESETS: PRESETS };
+  window.CMLiquidButton = { upgrade: upgrade, init: init, destroy: destroy, PRESETS: PRESETS };
 })();
